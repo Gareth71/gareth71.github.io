@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Understanding quantity selectors</title>
+    <link rel="stylesheet" href="../../styles/index.css" />
+  </head>
+  <body>
+    <nav><a target="self" href="../../../">Home</a></nav>
+    <main>
+      <h1>Understanding quantity selectors</h1>
+      <p>
+        Using the <code>nth-last-child</code> selector, we can select elements
+        based on how many siblings they have. Once that is mastered we can
+        select containers based on how many children they have by using
+        <code>:has</code>.
+      </p>
+
+      <a target="_blank" href="https://youtu.be/yYKX72xjFx8"
+        >I Love CSS Quantity Queries</a
+      >
+
+      <a
+        target="_blank"
+        href="https://disco-cardamom-c12.notion.site/Position-selectors-e1651e40b8724a8ca97cef44a2c5eb85?pvs=4"
+        >Position selectors</a
+      >
+
+      <h2>At least</h2>
+      <p>
+        The first line of the selector gets all children apart from the last 3.
+        If the first line gets a match, the <i>tilde</i> in the second applies
+        the styling to the following children.
+      </p>
+
+      <!-- prettier-ignore -->
+      <style contenteditable>.at-least .box:nth-last-child(n + 3),
+.at-least .box:nth-last-child(n + 3) ~ .box {
+    background-color: orange;
+}</style>
+
+      <div class="wrap at-least" data-wrap="at-least">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+      </div>
+
+      <div class="row">
+        <button class="secondary" data-add="at-least">Add box</button>
+        <button class="secondary" data-remove="at-least">Remove box</button>
+      </div>
+
+      <h2>At most</h2>
+      <p>
+        The minus before the n means we are now selecting the last 3 children,
+        but only if the <code>:first-child</code> is one of them.
+      </p>
+
+      <!-- prettier-ignore -->
+      <style contenteditable>.at-most .box:nth-last-child(-n + 3):first-child,
+.at-most .box:nth-last-child(-n + 3):first-child ~ .box {
+    background-color: orange;
+}</style>
+
+      <div class="row">
+        <button class="secondary" data-add="at-most">Add box</button>
+        <button class="secondary" data-remove="at-most">Remove box</button>
+      </div>
+
+      <div class="wrap at-most" data-wrap="at-most">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+      </div>
+
+      <h2>Between</h2>
+      <p>
+        The <i>between</i> selector combines the <i>at least</i> and
+        <i>at most</i> selectors.
+      </p>
+      <p>
+        Find all children apart from last <code>n + 2</code>, check that group
+        also contains the last <code>-n + 3</code> and the
+        <code>first-child</code>.
+      </p>
+
+      <!-- prettier-ignore -->
+      <style contenteditable>.between .box:nth-last-child(n + 2):nth-last-child(-n + 4):first-child,
+.between .box:nth-last-child(n + 2):nth-last-child(-n + 4):first-child ~ .box {
+    background-color: orange;
+}</style>
+
+      <div class="row">
+        <button class="secondary" data-add="between">Add box</button>
+        <button class="secondary" data-remove="between">Remove box</button>
+      </div>
+
+      <div class="wrap between" data-wrap="between">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+      </div>
+    </main>
+
+    <!-- --------------------------------------------------- -->
+
+    <style>
+      .box {
+        height: 5rem;
+        width: 100%;
+        background-color: hsl(200, 100%, 50%);
+
+        counter-increment: count;
+        &::before {
+          display: block;
+          padding: 0.5rem;
+          color: white;
+          content: counter(count);
+        }
+      }
+
+      .wrap {
+        border-radius: 1rem;
+        display: flex;
+        gap: 0.75rem;
+        min-height: 5rem;
+      }
+    </style>
+
+    <!-- --------------------------------------------------- -->
+
+    <script>
+      const wrap = document.querySelector("[data-wrap]");
+      [...document.querySelectorAll("[data-add]")].forEach((button) =>
+        button.addEventListener("click", add)
+      );
+      [...document.querySelectorAll("[data-remove]")].forEach((button) =>
+        button.addEventListener("click", remove)
+      );
+
+      function add(event) {
+        const selector = event.target.dataset.add;
+        const box = document.createElement("div");
+        box.classList = "box";
+        document.querySelector(`[data-wrap="${selector}"]`).append(box);
+      }
+      function remove() {
+        const selector = event.target.dataset.remove;
+        document
+          .querySelector(`[data-wrap="${selector}"]`)
+          .lastElementChild.remove();
+      }
+    </script>
+  </body>
+</html>
