@@ -1,149 +1,33 @@
-:root {
-  --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --color-primary: hsl(214, 82%, 51%);
-  --color-surface: hsl(0, 0%, 94%);
-  --color-text: hsl(214, 30%, 30%);
-}
-
-/* reset start */
-
-html {
-  box-sizing: border-box;
-  /* -webkit-font-smoothing: antialiased; */
-  /* -moz-osx-font-smoothing: grayscale; */
-}
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
-body {
-  margin: 0;
-}
-
-/* reset end */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-block-start: 2em;
-  margin-block-end: 0;
-  line-height: 1.1;
-}
-
-p {
-  line-height: 1.5;
-  margin-block-end: 0;
-}
-p + p {
-  margin-block-start: 0.5em;
-}
+@import url("reset.css");
+@import url("variables.css");
+@import url("buttons.css");
+@import url("links.css");
+@import url("stack-row.css");
+@import url("contenteditable.css");
 
 body {
   font-family: var(--system-ui);
-  color: var(--color-text);
+  color: var(--color-text-on-light);
   background-color: var(--color-surface);
-
-  padding: 1rem;
+  padding: var(--gap-4);
   max-width: 600px;
   margin-inline: auto;
-}
-
-:where(main > *) {
-  margin-top: 1rem;
-}
-main {
-  display: flex;
-  flex-direction: column;
 }
 
 :focus-visible {
   outline-offset: 2px;
   outline-style: solid;
   outline-width: 2px;
-  outline-color: var(--color-primary);
+  outline-color: var(--color-focus);
 }
 
 /* grid-template-columns: repeat (auto-fit, minmax(min(var(--min-column-size), 100%), 1fr)) ; */
 
-button {
-  appearance: none;
-  display: block;
-  border: none;
-  border-radius: 0.25rem;
-  border: 1px solid var(--color-primary);
-  background-color: var(--color-primary);
-  color: white;
-  line-height: 1;
-  font-size: 1rem;
-  font-weight: 400;
-  padding: calc(0.75rem - 1px) calc(1.25rem - 2px);
+ul[role="list"] {
+  list-style: none;
+  padding: 0;
 
-  &:hover {
-    cursor: pointer;
+  li + li {
+    margin-top: var(--gap-2);
   }
-}
-
-button.secondary {
-  background-color: var(--color-surface);
-  color: var(--color-primary);
-
-  &:hover {
-    background-color: #fff;
-  }
-}
-
-a:not([class]) {
-  color: var(--color-primary);
-  text-underline-offset: 0.15em;
-}
-
-a[href*="youtu.be"]::before {
-  width: 34px;
-  height: 24px;
-  text-decoration: none;
-  vertical-align: middle;
-  display: inline-block;
-  content: url("../images/youtube.svg");
-  margin-inline-end: 0.5em;
-}
-
-a[href*="notion"]::before {
-  width: 24px;
-  height: 24px;
-  text-decoration: none;
-  vertical-align: middle;
-  display: inline-block;
-  content: url("../images/notion-logo.svg");
-  margin-inline-end: 0.5em;
-}
-
-[contenteditable] {
-  display: block;
-  font-family: monospace;
-  line-height: 1.5;
-  white-space: pre-wrap;
-  /* overflow-wrap: break-word; */
-  color: grey;
-  border-radius: 0.25rem;
-  padding: 1rem;
-  border: 1px solid silver;
-
-  &:hover {
-    background-color: #fff;
-  }
-  &:focus {
-    background-color: #fdfdfd;
-  }
-}
-
-.row {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
 }

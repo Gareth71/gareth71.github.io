@@ -1,0 +1,27 @@
+:root {
+  --color-primary: hsl(215, 85%, 45%);
+  --color-primary-dark: hsl(215, 85%, 35%);
+  --color-surface: hsl(0, 0%, 94%);
+  --color-text-on-light: hsl(216, 43%, 16%);
+  --color-text-on-dark: hsl(0, 0%, 100%);
+  --color-orange: orange;
+  --color-focus: hsl(272, 72%, 53%);
+
+  --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-size-1: 1rem;
+
+  --gap-1: 0.25rem; /*  4px  */
+  --gap-2: 0.5rem; /*   8px  */
+  --gap-3: 0.75rem; /*  12px  */
+  --gap-4: 1rem; /*     16px  */
+  --gap-5: 1.5rem; /*   24px  */
+  --gap-6: 2rem; /*     48px  */
+
+  --rad-0: 0;
+  --rad-1: var(--gap-1); /*  4px  */
+  --rad-2: var(--gap-2); /*  8px  */
+  --rad-3: var(--gap-3); /*  12px  */
+  --rad-4: var(--gap-4); /*  16px  */
+  --rad-5: var(--gap-5); /*  24px  */
+}

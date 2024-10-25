@@ -1,0 +1,18 @@
+[contenteditable] {
+  display: block;
+  font-family: monospace;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  /* overflow-wrap: break-word; */
+  color: grey;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  border: 1px solid silver;
+
+  &:hover {
+    background-color: #fff;
+  }
+  &:focus {
+    background-color: #fdfdfd;
+  }
+}

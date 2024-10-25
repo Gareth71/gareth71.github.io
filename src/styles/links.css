@@ -1,0 +1,24 @@
+a:not([class]) {
+  color: var(--color-primary);
+  text-underline-offset: 0.15em;
+}
+
+a[href*="youtu.be"]::before {
+  width: 34px;
+  height: 24px;
+  text-decoration: none;
+  vertical-align: middle;
+  display: inline-block;
+  content: url("../images/youtube.svg");
+  margin-inline-end: 0.5em;
+}
+
+a[href*="notion"]::before {
+  width: 24px;
+  height: 24px;
+  text-decoration: none;
+  vertical-align: middle;
+  display: inline-block;
+  content: url("../images/notion-logo.svg");
+  margin-inline-end: 0.5em;
+}
