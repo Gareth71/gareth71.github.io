@@ -1,6 +1,7 @@
 [contenteditable] {
   display: block;
   font-family: monospace;
+  font-weight: 600;
   line-height: 1.5;
   white-space: pre-wrap;
   /* overflow-wrap: break-word; */
@@ -15,4 +16,15 @@
   &:focus {
     background-color: #fdfdfd;
   }
+}
+
+code {
+  font-family: monospace;
+  font-weight: 600;
+}
+.code-block {
+  white-space: pre-wrap;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  border: 1px solid silver;
 }

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Heading line-height</title>
+    <link rel="stylesheet" href="../../styles/index.css" />
+  </head>
+  <body>
+    <nav><a target="_self" href="../../../">Home</a></nav>
+    <main class="stack">
+      <h1>Heading line-height</h1>
+      <a
+        target="_blank"
+        href="https://kittygiraudel.com/2020/05/18/using-calc-to-figure-out-optimal-line-height/"
+        >Using calc to figure out optimal line height</a
+      >
+      <p>
+        The bigger type gets the tighter its line-height should be. A
+        line-height of 1.1 works for very large type but is too tight for
+        smaller headings. Instead of specifying line-heights for each heading
+        size we can calculate it like this.
+      </p>
+
+      <!-- prettier-ignore -->
+      <code class="code-block"><pre>h1,h2,h3,h4,h5,h6 {
+    line-height: calc(0.125rem + 1em + 0.125rem);
+}</pre></code>
+
+      <div class="line-height">
+        <span class="em"
+          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas,
+          quidem.</span
+        >
+      </div>
+      <p>
+        With a 24px font with 1.5 line-height, the text takes up 1em (24px) and
+        the remaining space (24px) is split above and below.
+      </p>
+
+      <div class="line-height line-height-calc">
+        <span class="em"
+          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas,
+          quidem.</span
+        >
+      </div>
+      <p>
+        With the calc method we only add 2px above and below. This is always the
+        same amount of space between lines regardless of font size.
+      </p>
+
+      <h2>Demo</h2>
+
+      <label for="select">
+        Choose line-height
+        <select id="select" data-select>
+          <option value="line-height-calc">calc</option>
+          <option value="line-height-1-1">1.1</option>
+          <option value="line-height-1-5">1.5</option>
+        </select>
+      </label>
+
+      <div class="row">
+        <div class="stack" data-stack>
+          <h1>
+            Heading h1 Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Quibusdam optio quis nemo doloremque veritatis.
+          </h1>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint
+            labore consequuntur quam est, neque ipsa voluptatem non? Illo, quam
+            praesentium id aspernatur numquam similique quidem blanditiis soluta
+            ea mollitia! Quas?
+          </p>
+          <h2>
+            Heading h2 Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Quibusdam optio quis nemo doloremque veritatis.
+          </h2>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint
+            labore consequuntur quam est, neque ipsa voluptatem non? Illo, quam
+            praesentium id aspernatur numquam similique quidem blanditiis soluta
+            ea mollitia! Quas?
+          </p>
+          <h3>
+            Heading h3 Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Quibusdam optio quis nemo doloremque veritatis.
+          </h3>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint
+            labore consequuntur quam est, neque ipsa voluptatem non? Illo, quam
+            praesentium id aspernatur numquam similique quidem blanditiis soluta
+            ea mollitia! Quas?
+          </p>
+          <h4>
+            Heading h3 Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Quibusdam optio quis nemo doloremque veritatis.
+          </h4>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint
+            labore consequuntur quam est, neque ipsa voluptatem non? Illo, quam
+            praesentium id aspernatur numquam similique quidem blanditiis soluta
+            ea mollitia! Quas?
+          </p>
+          <h5>
+            Heading h3 Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Quibusdam optio quis nemo doloremque veritatis.
+          </h5>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint
+            labore consequuntur quam est, neque ipsa voluptatem non? Illo, quam
+            praesentium id aspernatur numquam similique quidem blanditiis soluta
+            ea mollitia! Quas?
+          </p>
+          <h6>
+            Heading h3 Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Quibusdam optio quis nemo doloremque veritatis.
+          </h6>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint
+            labore consequuntur quam est, neque ipsa voluptatem non? Illo, quam
+            praesentium id aspernatur numquam similique quidem blanditiis soluta
+            ea mollitia! Quas?
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <!-- --------------------------------------------------- -->
+
+    <style>
+      .line-height-1-1 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          line-height: 1.1;
+        }
+      }
+      .line-height-1-5 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          line-height: 1.5;
+        }
+      }
+
+      .line-height {
+        font-size: 2rem;
+        display: flex;
+        align-items: center;
+        height: calc(1em * 1.5);
+        background-color: var(--color-orange);
+
+        span {
+          display: inline-block;
+          line-height: 1em;
+          height: 1em;
+          vertical-align: middle;
+          background-color: white;
+          overflow: hidden;
+        }
+      }
+
+      .line-height-calc {
+        height: calc(2px + 1em + 2px);
+      }
+    </style>
+
+    <!-- --------------------------------------------------- -->
+
+    <script>
+      const stack = document.querySelector("[data-stack]");
+      document
+        .querySelector("[data-select]")
+        .addEventListener("change", (event) => {
+          const className = event.target.value;
+          stack.classList.remove(
+            "line-height-calc",
+            "line-height-1-1",
+            "line-height-1-5"
+          );
+          stack.classList.add(className);
+        });
+    </script>
+  </body>
+</html>

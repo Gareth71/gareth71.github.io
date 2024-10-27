@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inputs</title>
+    <link rel="stylesheet" href="../../styles/index.css" />
+  </head>
+  <body>
+    <nav><a target="_self" href="../../../">Home</a></nav>
+    <main class="stack">
+      <h1>Inputs</h1>
+      <h2>Hiding the inner-spin-button</h2>
+      <p>
+        On desktop an input with <code>type="number"</code> will show an up and
+        down arrow inside the input
+      </p>
+      <img
+        width="197"
+        height="43"
+        src="./input-with-spin.png"
+        alt="an input with inner-spin-button"
+      />
+      <p>
+        We can hide this with CSS or we can use a text input instead. If we use
+        the text input we need to prevent non numbers being added with JS. Only
+        Chrome prevents this on number inputs so we will will need to do it
+        anyway. I still prefer to use the number input for the improved
+        accessibility.
+      </p>
+
+      <label for="numeric">
+        type="number"
+        <input
+          type="number"
+          inputmode="numeric"
+          id="numeric"
+          pattern="[0-9]+"
+        />
+      </label>
+
+      <label for="text">
+        type="text"
+        <input type="text" inputmode="numeric" id="text" pattern="[0-9]+" />
+      </label>
+
+      <!-- prettier-ignore -->
+      <style contenteditable>/* Chromium & Safari */
+input[type="number"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}</style>
+
+      <!-- prettier-ignore -->
+      <script contenteditable>
+    const numericInputs = document.querySelectorAll("[inputmode='numeric']");
+
+    numericInputs.forEach((input) => {
+    validateInput(input);
+    });
+
+    function validateInput(el) {
+    el.addEventListener("beforeinput", function (e) {
+        let beforeValue = el.value;
+        e.target.addEventListener(
+        "input",
+        function () {
+            if (el.validity.patternMismatch) {
+            el.value = beforeValue;
+            }
+        },
+        { once: true }
+        );
+    });
+    }
+</script>
+    </main>
+
+    <!-- --------------------------------------------------- -->
+  </body>
+</html>

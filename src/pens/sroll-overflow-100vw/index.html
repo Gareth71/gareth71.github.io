@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scrollbars cause overflow with 100vw</title>
+    <link rel="stylesheet" href="../../styles/index.css" />
+  </head>
+  <body>
+    <nav><a target="_self" href="../../../">Home</a></nav>
+    <main class="stack">
+      <h1>Scrollbars cause overflow with 100vw</h1>
+      <p>
+        It is a bad idea to use <code>width: 100vw;</code> as it will cause
+        horizontal scrolling as soon as your page is tall enough to have
+        vertical scrolling.
+      </p>
+      <p>
+        Classic scrollbars are currently not taken into account with
+        <code>100vw</code>, but they are with <code>width: 100%</code>. Apple
+        devices don't use classic scrollbars unless you turn them on at the
+        system level.
+      </p>
+      <p>System Preferences > General. Change "Show scroll bars:" to Always.</p>
+    </main>
+    <div class="stack">
+      <div class="box" style="width: 100vw">width: 100vw;</div>
+      <div class="box" style="width: 100vw; max-width: 100%">
+        width: 100vw; max-width: 100%;
+      </div>
+      <div class="box" style="width: 100%">width: 100%;</div>
+    </div>
+
+    <!-- --------------------------------------------------- -->
+
+    <style>
+      body {
+        min-height: 120vh;
+      }
+    </style>
+
+    <!-- --------------------------------------------------- -->
+
+    <script></script>
+  </body>
+</html>

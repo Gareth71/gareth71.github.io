@@ -5,6 +5,9 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  /* This is for debugging */
+  /* outline: 2px solid lime; */
+  /* background: hsl(0 100% 50% / .1); */
 }
 
 /* 2. Remove default margin */
@@ -53,7 +56,7 @@ h6 {
   text-wrap: balance;
   /* gr improved line spacing 
   https://kittygiraudel.com/2020/05/18/using-calc-to-figure-out-optimal-line-height/ */
-  line-height: calc(0.125rem + 2ex + 0.125rem);
+  line-height: calc(0.125rem + 1em + 0.125rem);
 }
 
 /*

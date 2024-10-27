@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SVG sprites</title>
+    <link rel="stylesheet" href="../../styles/index.css" />
+  </head>
+  <body>
+    <?xml version="1.0" encoding="utf-8"?>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      <defs>
+        <symbol viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" id="notion">
+          <path d="M6.017 4.313l55.333 -4.087c6.797 -0.583 8.543 -0.19 12.817 2.917l17.663 12.443c2.913 2.14 3.883 2.723 3.883 5.053v68.243c0 4.277 -1.553 6.807 -6.99 7.193L24.467 99.967c-4.08 0.193 -6.023 -0.39 -8.16 -3.113L3.3 79.94c-2.333 -3.113 -3.3 -5.443 -3.3 -8.167V11.113c0 -3.497 1.553 -6.413 6.017 -6.8z" fill="#fff"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M61.35 0.227l-55.333 4.087C1.553 4.7 0 7.617 0 11.113v60.66c0 2.723 0.967 5.053 3.3 8.167l13.007 16.913c2.137 2.723 4.08 3.307 8.16 3.113l64.257 -3.89c5.433 -0.387 6.99 -2.917 6.99 -7.193V20.64c0 -2.21 -0.873 -2.847 -3.443 -4.733L74.167 3.143c-4.273 -3.107 -6.02 -3.5 -12.817 -2.917zM25.92 19.523c-5.247 0.353 -6.437 0.433 -9.417 -1.99L8.927 11.507c-0.77 -0.78 -0.383 -1.753 1.557 -1.947l53.193 -3.887c4.467 -0.39 6.793 1.167 8.54 2.527l9.123 6.61c0.39 0.197 1.36 1.36 0.193 1.36l-54.933 3.307 -0.68 0.047zM19.803 88.3V30.367c0 -2.53 0.777 -3.697 3.103 -3.893L86 22.78c2.14 -0.193 3.107 1.167 3.107 3.693v57.547c0 2.53 -0.39 4.67 -3.883 4.863l-60.377 3.5c-3.493 0.193 -5.043 -0.97 -5.043 -4.083zm59.6 -54.827c0.387 1.75 0 3.5 -1.75 3.7l-2.91 0.577v42.773c-2.527 1.36 -4.853 2.137 -6.797 2.137 -3.107 0 -3.883 -0.973 -6.21 -3.887l-19.03 -29.94v28.967l6.02 1.363s0 3.5 -4.857 3.5l-13.39 0.777c-0.39 -0.78 0 -2.723 1.357 -3.11l3.497 -0.97v-38.3L30.48 40.667c-0.39 -1.75 0.58 -4.277 3.3 -4.473l14.367 -0.967 19.8 30.327v-26.83l-5.047 -0.58c-0.39 -2.143 1.163 -3.7 3.103 -3.89l13.4 -0.78z" fill="#000"/>
+        </symbol>
+        <symbol viewBox="0 0 34 25" fill="none" xmlns="http://www.w3.org/2000/svg" id="youtube">
+          <path d="M26.9314 0.703125H7.10305C3.21277 0.703125 0.059082 3.85681 0.059082 7.7471V17.6592C0.059082 21.5494 3.21277 24.7031 7.10305 24.7031H26.9314C30.8216 24.7031 33.9753 21.5494 33.9753 17.6592V7.7471C33.9753 3.85681 30.8216 0.703125 26.9314 0.703125ZM22.1676 13.1854L12.8932 17.6087C12.6461 17.7265 12.3606 17.5464 12.3606 17.2726V8.14953C12.3606 7.87187 12.6536 7.69192 12.9012 7.81743L22.1756 12.5172C22.4513 12.6569 22.4466 13.0524 22.1676 13.1854Z" fill="#F61C0D"/>
+          <path d="M12.8932 17.6087L22.1676 13.1854C22.4466 13.0524 22.4513 12.6569 22.1756 12.5172L12.9012 7.81743C12.6536 7.69192 12.3606 7.87187 12.3606 8.14953V17.2726C12.3606 17.5464 12.6461 17.7265 12.8932 17.6087Z" fill="white"/>
+          </symbol>
+      </defs>
+    </svg>
+
+
+    <nav><a target="_self" href="../../../">Home</a></nav>
+
+    <main class="stack">
+      <h1>SVG sprites</h1>
+
+      <a target="_blank" href="https://medium.com/@hayavuk/complete-guide-to-svg-sprites-7e202e215d34">Complete guide to SVG sprites</a>
+      
+      <p>All your svgs can be cached inside an svg sprite sheet and accessed without any additional loading.</p>
+      <p>Create the sprite sheet like this</p>
+      <!-- prettier-ignore -->
+<code class="code-block">&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  &lt;defs>
+    &lt!-- icons go here -->
+  &lt;/defs>
+&lt;/svg>
+</code>
+
+<p>Paste svgs into it, change <code>svg</code> to <code>symbol</code> and add an id for each one.</p>
+      <!-- prettier-ignore -->
+<code class="code-block">&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  &lt;defs>
+    &lt;symbol viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" id="notion">
+      &lt;path d="M6.017 4.313l55.333 -4.087c6.797 -0.583 8.543 -0.19 ..." fill="#fff">
+      &lt;path fill-rule="evenodd" clip-rule="evenodd" d="M61.35 ..." fill="#000"/>
+  &lt;/symbol>
+  &lt;/defs>
+&lt;/svg>
+</code>
+
+<p>When you want to use a svg insert the use element like this with the id of the symbol.</p>
+      <!-- prettier-ignore -->
+<code class="code-block">&lt;svg class="icon">
+  &lt;use href="#notion" aria-hidden="true">
+&lt;/svg></code>
+
+      <div class="row">
+      <svg class="icon"><use href="#notion" aria-hidden="true"></svg>
+      <svg class="icon"><use href="#youtube" aria-hidden="true"></svg>
+      </div>
+    </main>
+
+    <!-- --------------------------------------------------- -->
+
+    <style></style>
+
+    <!-- --------------------------------------------------- -->
+
+    <script></script>
+  </body>
+</html>

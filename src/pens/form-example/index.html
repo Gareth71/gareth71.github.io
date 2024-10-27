@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form example</title>
+    <link rel="stylesheet" href="../../styles/index.css" />
+  </head>
+  <body>
+    <nav><a target="_self" href="../../../">Home</a></nav>
+    <main class="stack">
+      <h1>Form example</h1>
+      <p>Validation pop-ups will appear unless you apply novalidate to the form containing the inputs</p>
+      
+      <div class="row">
+        Apply novalidate to form
+      <label for="novalidate-true"><input type="radio" id="novalidate-true" name="novalidate" value="true" checked/>True</label>
+      <label for="novalidate-false"><input type="radio" id="novalidate-false" name="novalidate" value="false" />False</label>
+    </div>
+
+
+      <form name="form" class="stack">
+          <fieldset  class="stack">
+            <legend>Legend</legend>
+            
+            <label class="stack" for="input-1">Label - aria-required
+            <input id="input-1" type="text" aria-required="true" />
+          </label>
+            
+            <label class="stack" for="input-2">Label - aria-required
+            <input id="input-2" type="text" required />
+          </label>
+            
+        
+          </fieldset>
+          <div class="row">
+            <button class="secondary" type="reset">Reset</button>
+        
+          <button type="submit">Submit</button>
+          </div>
+
+        <form>
+          
+
+    </main>
+
+    <!-- --------------------------------------------------- -->
+    
+    <style></style>
+
+    <!-- --------------------------------------------------- -->
+    
+    <script>
+const form = document.querySelector('form');
+form.setAttribute('novalidate', "");
+
+
+document.addEventListener('change', event => {
+  const value = event.target.value === 'true';
+  const name = event.target.name;
+  if (value) {
+    form.setAttribute('novalidate', "");
+  } else {
+    form.removeAttribute('novalidate');
+  }
+
+})
+
+
+    </script>
+
+  </body>
+</html>
