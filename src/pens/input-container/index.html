@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InputContainer</title>
+    <link rel="stylesheet" href="../../styles/index.css" />
+  </head>
+  <body>
+    <nav><a target="_self" href="../../../">Home</a></nav>
+    <main class="stack">
+      <h1>InputContainer</h1>
+
+
+
+      <form id="form" novalidate class="stack">
+
+        <!-- Should only  -->
+        <div class="live-errors visually-hidden" role="alert">
+            <!-- visually hidden doesn't prevent focus being applied to heading -->
+            <h2>Error summary: please correct the following error(s):</h2>
+            <p>(this is visually hidden on page load and has role="alert")</p>
+            <ul>
+              <li><a href="#input">Input: Error message</a></li>
+            </ul>
+          </div>
+
+        <h2>Heading: form should have a heading to describe its purpose</h2>
+        <fieldset>
+        <legend>Legend: all inputs in fieldset should have same value for their "name"</legend>
+        <div class="wrap">
+          <!-- for="input or aria-labelledby="label" ??? -->
+          <label id="label" class="label">Label</label>
+          <p id="description" class="describedby">Description: 
+            Should a description be in the label or use aria-describedby?
+        </br>Information about an input eg password pattern should go above it
+          </p>
+          <p id="error" class="error">
+            <svg
+              class="icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="12" cy="12" r="12" fill="#D90429" />
+              <path
+                fill="#fff"
+                d="M7.054 8.437a1.02 1.02 0 0 1-.24-.69c0-.25.11-.49.29-.67.18-.18.42-.28.67-.29.25 0 .5.08.69.24l3.36 3.36s.05.04.08.06c.03.01.06.02.1.02.04 0 .07 0 .1-.02.03-.01.06-.03.08-.06l3.36-3.36c.19-.19.44-.31.71-.31.27 0 .53.1.72.28.19.19.31.44.31.71 0 .27-.1.53-.28.72l-3.36 3.36s-.04.05-.06.08c-.01.03-.02.06-.02.1 0 .04 0 .07.02.1.01.03.03.06.06.08l3.36 3.36c.1.09.18.21.23.33.05.13.08.26.08.4s-.03.27-.08.4-.13.24-.23.33c-.09.09-.2.17-.33.22a.83.83 0 0 1-.38.07c-.26 0-.51-.11-.7-.29l-3.36-3.36s-.05-.04-.08-.06a.296.296 0 0 0-.1-.02c-.04 0-.07 0-.1.02-.03.01-.06.03-.08.06l-3.41 3.36c-.19.18-.44.29-.7.29a.986.986 0 0 1-1-.99c0-.26.1-.52.29-.7l3.36-3.36s.04-.05.06-.08c.01-.03.02-.06.02-.1 0-.04 0-.07-.02-.1a.156.156 0 0 0-.06-.08l-3.36-3.41Z"
+              />
+              aria-hidden="true"
+            </svg>
+            This field is required
+          </p>
+          <input
+            name="input"
+            id="input"
+            required
+            aria-labelledby="label"
+            aria-describedby="error description"
+            type="text"
+          />
+          <button aria-controls="input">Button</button>
+        </fieldset>
+
+          <button type="submit" form="form">Submit</button>
+        </div>
+      </form>
+    </main>
+
+    <!-- --------------------------------------------------- -->
+
+    <style>
+      :root {
+        --red: rgb(154, 0, 0);
+        --red-tint: rgba(154, 0, 0, 0.1);
+      }
+
+      .live-errors {
+        background-color: var(--red-tint);
+        border: 1px solid var(--red);
+        padding: 1rem;
+      }
+      input[aria-invalid="true"] {
+        border-color: red;
+        color: red;
+      }
+
+      .error {
+        margin-bottom: 0.5rem;
+        color: rgb(154, 0, 0);
+        display: none;
+      }
+      .icon {
+        width: 1.5rem;
+        display: inline-block;
+        vertical-align: middle;
+      }
+    </style>
+
+    <!-- --------------------------------------------------- -->
+
+    <script>
+      const liveErrors = document.querySelector(".live-errors");
+      const input = document.querySelector("input");
+      const error = document.querySelector("#error");
+      document.getElementById("form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        input.setAttribute("aria-invalid", "true");
+        liveErrors.classList.remove("visually-hidden");
+        liveErrors.querySelector("h2").focus();
+        error.style.display = "block";
+        document.title = `Error: ${document.title}`;
+      });
+    </script>
+  </body>
+</html>

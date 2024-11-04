@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card as link</title>
+    <link rel="stylesheet" href="../../styles/index.css" />
+  </head>
+  <body>
+    <nav><a target="_self" href="../../../">Home</a></nav>
+    <main class="stack">
+      <h1>Card as link</h1>
+
+      <ul class="card-list">
+        <li>
+          <div class="card card-js stack">
+            <h2>JS version</h2>
+              <a class="primary" href="#primary-link">Primary</a>
+              <a class="secondary" href="#secondary-link">Secondary</a>
+              <button class="secondary">Button</button>
+            </div>
+        </li>
+        <li >
+            <div class="card card-absolute stack">
+                <h2>Absolutely positioned :before version</h2>
+                  <a class="primary" href="#primary-link">Primary</a>
+                  <a class="secondary" href="#secondary-link">Secondary</a>
+                  <button class="secondary">Button</button>
+              </div>
+        </li>
+      </ul>
+
+
+
+      <div class="Notes">
+        <p>
+          Don't wrap whole card as a link as assistive technologies will read
+          the whole content out. There are two alternatives to this.
+        </p>
+        <p>
+          Add a :before element to the link and position it over the top of the
+          card, any other interactive elements you lift above the :before with
+          z-index.
+        </p>
+        <p>
+          Or add a click event to the card which on click triggers the link. You
+          can allow users to select text in the card
+        </p>
+        <p>Both would require you to add some hover styling to the card</p>
+      </div>
+
+      <div class="link-holder stack">
+      <p id="primary-link">Primary</p>
+      <p id="secondary-link">Secondary</p>
+      <button onClick="window.scrollTo(0,0)"">Back to top</button>
+    </div>
+    </main>
+
+    <!-- --------------------------------------------------- -->
+
+    <style>
+      .card-list {
+        list-style: none;
+        padding: 0;
+        display: grid;
+        gap: 1rem;
+      }
+      .card {
+        padding: 1rem;
+        border: 1px solid grey;
+        cursor: pointer;
+        border-radius: 1rem;
+
+        &:hover {
+          background-color: silver;
+          a.primary {
+            background-color: grey;
+          }
+
+        }
+
+        &:has(a.primary:focus) {
+          outline-offset: 2px;
+          outline-style: solid;
+          outline-width: 2px;
+          outline-color: var(--color-focus);
+        }
+
+        /* Only disable focus style if :has is supported */
+        &:has(a.primary) a.primary:focus {
+          /* outline: none; */
+        }
+      }
+
+      .card-absolute {
+        position: relative;
+
+        .primary:before {
+          content: "";
+
+          position: absolute;
+          inset: 0;
+        }
+
+        a:not(.primary),
+        button,
+        input {
+          position: relative;
+        }
+      }
+
+      .link-holder {
+        padding-top: 100vh;
+
+        :target {
+            outline: solid red;
+        }
+      }
+    </style>
+
+    <!-- --------------------------------------------------- -->
+
+    <script>
+      const isInteractive = (element) => {
+        const INTERACTIVE_TAGS = ["button", "input", "a"];
+        if (INTERACTIVE_TAGS.includes(element.tagName.toLowerCase()))
+          return true;
+      };
+      [...document.querySelectorAll(".card-js")].forEach((card) => {
+        const link = card.querySelector("a.primary");
+        let down;
+        card.onmousedown = () => {
+          if (isInteractive(event.target)) return;
+          down = +new Date();
+        };
+        card.onmouseup = (event) => {
+          if (isInteractive(event.target)) return;
+          const up = +new Date();
+          if (up - down < 200) {
+            link.click();
+          }
+        };
+      });
+    </script>
+  </body>
+</html>
