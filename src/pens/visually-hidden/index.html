@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visually hidden</title>
+    <link rel="stylesheet" href="../../styles/index.css" />
+  </head>
+  <body>
+    <nav><a target="_self" href="../../../">Home</a></nav>
+    <main class="stack">
+      <h1>Visually hidden</h1>
+
+      <p>
+        You can visually hide items but leave them accessible to assisted
+        technology by adding a class with these styles. This is better than
+        applying <code>aria-label</code>
+        or alt text, as text in the DOM is more likely to be translated than
+        text inside any form of attribute.
+      </p>
+      <!-- prettier-ignore -->
+      <code class="code-block">.visually-hidden:not(:focus):not(:active) {
+    border: 0 !important;
+    clip: rect(0 0 0 0) !important; 
+    clip-path: inset(50%) !important;
+    height: 1px !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    white-space: nowrap !important; 
+    width: 1px !important;
+}</code>
+
+      <ul>
+        <li>
+          <code>:not(:focus):not(:active)</code> is because anything focused or
+          active should be visible to the user.
+        </li>
+        <li>
+          <code>!important</code> is to avoid and other styles leaking in.
+        </li>
+        <li>
+          For full details see
+          <a
+            target="_blank"
+            href="https://www.tpgi.com/the-anatomy-of-visually-hidden/"
+            >The anatomy of visually hidden</a
+          >
+        </li>
+      </ul>
+
+      <p>The class can now be used inside say a button that only has an icon</p>
+      <!-- prettier-ignore -->
+      <code class="code-block">&lt;button>
+  &lt;svg version="1.1"
+  width="24" height="24"
+  xmlns="http://www.w3.org/2000/svg">
+    &lt;rect width="100%" height="100%" fill="red" />
+  &lt;/svg>
+
+  &lt;span class="visually-hidden">Close&lt;/span>
+
+&lt;/button>
+</code>
+
+      <button>
+        <svg
+          version="1.1"
+          width="24"
+          height="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect width="100%" height="100%" fill="red" />
+        </svg>
+        <span class="visually-hidden">Close</span>
+      </button>
+    </main>
+
+    <!-- --------------------------------------------------- -->
+
+    <style>
+      button {
+        width: fit-content;
+      }
+      .visually-hidden:not(:focus):not(:active) {
+        border: 0 !important;
+        clip: rect(0 0 0 0) !important;
+        clip-path: inset(50%) !important;
+        height: 1px !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+        position: absolute !important;
+        white-space: nowrap !important;
+        width: 1px !important;
+      }
+    </style>
+
+    <!-- --------------------------------------------------- -->
+
+    <script></script>
+  </body>
+</html>
