@@ -1,0 +1,145 @@
+:root {
+  --font-family-text-font: "Lexend", sans-serif; /* Replace with actual font family */
+  --font-family-display-font: "DM Serif Display", serif; /* Replace with actual font family */
+
+  /* Font Weight */
+  --font-weight-400: 400;
+  --font-weight-600: 600;
+  --font-weight-700: 700;
+
+  /* Line Height */
+  --line-height-default-150: 1.5;
+  --line-height-120: 1.2;
+  --line-height-125: 1.25;
+  --line-height-110: 1.1;
+  --line-height-100: 1;
+
+  /* Font size */
+  --font-size-xsmall: 0.75rem;
+  --font-size-small: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-medium: 1.25rem;
+  --font-size-large: 1.5rem;
+  --font-size-xlarge: 1.75rem;
+  --font-size-2xlarge: 2.25rem;
+  --font-size-3xlarge: 2.75rem;
+  --font-size-4xlarge: 3.75rem;
+
+  /** Icons **/
+  --icon-size-xsmall: 0.75rem;
+  --icon-size-small: 1rem;
+  --icon-size-regular: 1.5rem;
+  --icon-size-medium: 2.25rem;
+  --icon-size-large: 2.5rem;
+
+  /** Illustrations **/
+  --illustration-size-regular: 10.625rem;
+
+  /** Spacing **/
+  --gap-1: 0.25rem; /* 4 */
+  --gap-2: 0.5rem; /* 8 */
+  --gap-3: 0.75rem; /* 12 */
+  --gap-4: 1rem; /* 16 */
+  --gap-5: 1.5rem; /* 24 */
+  --gap-6: 3rem; /* 48 */
+  --gap-7: 4rem; /* 64 */
+  --gap-8: 5rem; /* 76 */
+
+  /** Border Radius **/
+  --border-radius-small: 0.25rem;
+  --border-radius-default: 0.5rem;
+  --border-radius-large: 1rem;
+  --border-radius-xlarge: 1.5rem;
+  --border-radius-round: 100%;
+
+  /** Border Width **/
+  --border-width-0: 0px;
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+
+  /* Base Colors */
+  --white100: #fff;
+  --white90: #ffffffe6;
+  --white80: #fffc;
+  --white70: #ffffffb3;
+  --white60: #fff9;
+  --white50: #ffffff80;
+  --white40: #fff6;
+  --white30: #ffffff4d;
+  --white20: #fff3;
+  --white10: #ffffff1a;
+  --white0: #fff0;
+  --black: #333;
+
+  /* Primary Colors */
+  --primary100: #002147;
+  --primary90: #1a3759;
+  --primary80: #314b6a;
+  --primary70: #4c647e;
+  --primary60: #667a91;
+  --primary50: #8090a3;
+  --primary40: #99a6b5;
+  --primary30: #b3bdc8;
+  --primary20: #ccd3da;
+  --primary10: #e5e9ed;
+  --primary0: #fff;
+
+  /* Modern Colors */
+  --electric-blue: #0043e0;
+  --madrid-orange: #fd5821;
+  --big-apple-green: #c8dc00;
+  --kipper-yellow: #ffe12d;
+  --kipper-yellow-hover: #d2b400;
+  --isadora-pink: #f3a7b8;
+  --success-green: #a1d2a1;
+
+  /* Neutral Colors */
+  --neutral-blue100: #cad7d8;
+  --neutral-blue20: #f4f7f7;
+  --neutral-blue30: #eff3f3;
+  --neutral-red100: #f4eddd;
+  --neutral-green100: #e0e7d0;
+  --neutral-stone100: #f2eeda;
+  --neutral-grey: #e3e1e0;
+  --neutral-dark-grey: #c9d7d8;
+
+  /* Heritage Colors */
+  --ruskin-red100: #9b1827;
+  --ruskin-red80: #b51c2e;
+  --ruskin-red: #c8858c;
+  --mallard-green100: #005145;
+  --walton-stone100: #82745e;
+  --scholar-purple100: #5f4261;
+
+  /* Validation Colors */
+  --validation-green100: #008000;
+  --validation-green50: #00800080;
+  --validation-green20: #cce6cc;
+  --validation-red120: #a0031e;
+  --validation-red110: #b40421;
+  --validation-red100: #d70429;
+  --validation-red90: #f5052e;
+  --validation-red80: #fa1e44;
+  --validation-red70: #fb3759;
+  --validation-red60: #fc5572;
+  --validation-red50: #fc738b;
+  --validation-red40: #fd8c9f;
+  --validation-red30: #fdaab8;
+  --validation-red20: #fff4f6;
+  --validation-red10: #fee1e6;
+  --validation-orange100: #ff9914;
+  --validation-orange50: #ff991480;
+  --validation-orange20: #ffebd0;
+
+  --box-shadow-focus: 0 0 0 1px var(--white100), 0 0 0 3px var(--primary100),
+    0 0 0 4px var(--white100);
+  --box-shadow-focus-inset: inset 0 0 0 1px var(--white100),
+    inset 0 0 0 3px var(--primary100), inset 0 0 0 4px var(--white100);
+  --box-shadow-checkbox: 0 0 0 3px var(--primary20);
+  --box-shadow-outline: 0 0 0 1px var(--white100);
+  --box-shadow-1: 0 1px 2px 0 #0000004d, 0 1px 3px 1px #00000026;
+  --box-shadow-2: 0 1px 2px 0 #0000004d, 0 2px 6px 2px #00000026;
+  --box-shadow-3: 0 1px 3px 0 #0000004d, 0 4px 8px 3px #00000026;
+  --box-shadow-4: 0 2px 3px 0 #0000004d, 0 6px 10px 4px #00000026;
+  --box-shadow-5: 0 4px 4px 0 #0000004d, 0 8px 12px 6px #00000026;
+}
