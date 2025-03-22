@@ -75,3 +75,7 @@ ol[role="list"] {
 input[type="radio"] {
   margin-inline-end: var(--gap-1);
 }
+
+dd + dt {
+  margin-block-start: 1rem;
+}

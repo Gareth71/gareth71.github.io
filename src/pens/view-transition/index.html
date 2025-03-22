@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View transition</title>
+    <link rel="stylesheet" href="../../styles/index.css" />
+  </head>
+  <body>
+    <nav><a target="_self" href="../../../">Home</a></nav>
+    <main class="stack">
+      <h1>View transition</h1>
+
+      <div class="frame">
+        <div class="stack origin">
+          <div class="block" data-index="1">1</div>
+          <div class="block" data-index="2">2</div>
+          <div class="block" data-index="3">3</div>
+          <div class="block" data-index="4">4</div>
+          <div class="block" data-index="5">5</div>
+        </div>
+        <div class="stack destination"></div>
+      </div>
+    </main>
+
+    <!-- --------------------------------------------------- -->
+
+    <style>
+      .frame {
+        border: 1px solid black;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      .block {
+        min-height: 100px;
+        background-color: silver;
+        text-align: center;
+        line-height: 100px;
+      }
+
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation-duration: 5s;
+      }
+    </style>
+
+    <!-- --------------------------------------------------- -->
+
+    <script>
+      const origin = document.querySelector(".origin");
+      const destination = document.querySelector(".destination");
+
+      document.addEventListener("click", (e) => {
+        if (e.target.closest(".origin")) {
+          handleClick(e);
+        }
+      });
+
+      function updateTheDOMSomehow(e) {
+        const clickedBlock = e.target;
+
+        if (destination.children.length > 0) {
+          const destinationChild = destination.children[0];
+          const blockIndex = Number(destinationChild.dataset.index);
+          const blockIndexPlus1Element = document.querySelector(
+            `[data-index="${blockIndex + 1}"]`
+          );
+
+          origin.insertBefore(destinationChild, blockIndexPlus1Element);
+        }
+
+        destination.append(clickedBlock);
+      }
+
+      function handleClick(e) {
+        // Fallback for browsers that don't support this API:
+        if (!document.startViewTransition) {
+          updateTheDOMSomehow(e);
+          return;
+        }
+
+        // With a View Transition:
+        document.startViewTransition(() => updateTheDOMSomehow(e));
+      }
+    </script>
+  </body>
+</html>

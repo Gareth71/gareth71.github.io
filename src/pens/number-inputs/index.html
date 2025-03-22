@@ -25,8 +25,7 @@
         We can hide this with CSS or we can use a text input instead. If we use
         the text input we need to prevent non numbers being added with JS. Only
         Chrome prevents this on number inputs so we will will need to do it
-        anyway. I still prefer to use the number input for the improved
-        accessibility.
+        anyway.
       </p>
 
       <label for="numeric">
@@ -64,18 +63,19 @@ input[type="number"] {
     });
 
     function validateInput(el) {
-    el.addEventListener("beforeinput", function (e) {
-        let beforeValue = el.value;
-        e.target.addEventListener(
-        "input",
-        function () {
-            if (el.validity.patternMismatch) {
+      el.addEventListener("beforeinput", function (e) {
+          let beforeValue = el.value;
+          e.target.addEventListener(
+          "input",
+          function() {
+            console.log(el.validity, el.value)
+              if (el.validity.patternMismatch) {
               el.value = beforeValue;
-            }
-        },
-        { once: true }
-        );
-    });
+              }
+          },
+          { once: true }
+          );
+      });
     }
 </script>
     </main>

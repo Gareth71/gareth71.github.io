@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form validation</title>
+    <link rel="stylesheet" href="../../styles/index.css" />
+  </head>
+  <body>
+    <nav><a target="_self" href="../../../">Home</a></nav>
+    <main class="stack">
+      <h1>Form validation</h1>
+      <details>
+        <summary>Related links</summary>
+        <ul>
+          <li>
+            <a
+              target="_blank"
+              href="https://www.aleksandrhovhannisyan.com/blog/html-input-validation-without-a-form/"
+              >html input validation without a form</a
+            >
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://expressionstatement.com/html-form-validation-is-heavily-underused"
+              >HTML Form Validation is heavily underused</a
+            >
+          </li>
+        </ul>
+      </details>
+      <dl>
+        <dt>
+          <code>element.setCustomValidity("my custom error message")</code>
+        </dt>
+        <dd>
+          Apply a custom validation message to an element. Any element with a
+          custom validation message other than "" is invalid.
+        </dd>
+
+        <dt><code>element.checkValidity()</code></dt>
+        <dd>Returns true if element is valid and false if not.</dd>
+
+        <dt><code>element.reportValidity()</code></dt>
+        <dd>
+          Like checkValidity but will trigger the native validation pop-up on
+          the element the same as the submit button would.
+        </dd>
+
+        <dt><code>element.validity</code></dt>
+        <dd>
+          Returns validityState object
+          <details>
+            <summary>validityState</summary>
+            <ul>
+              <li>badInput</li>
+              <li>customError</li>
+              <li>patternMismatch</li>
+              <li>rangeOverflow</li>
+              <li>rangeUnderflow</li>
+              <li>stepMismatch</li>
+              <li>tooLong</li>
+              <li>tooShort</li>
+              <li>typeMismatch</li>
+              <li>valid</li>
+              <li>valueMissing</li>
+            </ul>
+          </details>
+        </dd>
+      </dl>
+
+      <p>
+        CSS uses the pseudo classes <code>:valid</code> and
+        <code>:invalid</code> to detect any &lt;form>, &lt;fieldset>, &lt;input>
+        or other &lt;form> element that is either valid or invalid
+      </p>
+
+      <p>
+        The newer and less well supported <code>:user-valid</code> and
+        <code>:user-invalid</code> only take effect after the user has
+        interacted with the input.
+      </p>
+
+      <form name="form" class="stack">
+        <label class="stack" for="input-1"
+          >Label - required
+          <input id="input-1" type="text" required />
+          <p>
+            <span class="valid">:valid</span>
+            <span class="invalid">:invalid</span>
+            <span class="user-valid">:user-valid</span>
+            <span class="user-invalid">:user-invalid</span>
+          </p>
+        </label>
+
+        <div class="row">
+          <button class="secondary" type="reset">Reset</button>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+
+      <p>Open console to see logs created by some buttons</p>
+      <div class="row">
+        <button class="secondary" onclick="inputSetCustomValidity()">
+          set custom validation
+        </button>
+        <button class="secondary" onclick="clearCustomValidity()">
+          clear custom validity
+        </button>
+        <button class="secondary" onclick="inputCheckValidity()">
+          checkValidity
+        </button>
+        <button class="secondary" onclick="inputReportValidity()">
+          reportValidity
+        </button>
+        <button class="secondary" onclick="inputValidity()">
+          log Validity
+        </button>
+        <button class="secondary" onclick="logValidationMessage()">
+          log validation message
+        </button>
+      </div>
+    </main>
+
+    <!-- --------------------------------------------------- -->
+
+    <style>
+      input + p {
+        margin: 0;
+      }
+      input + p span {
+        display: none;
+      }
+      input:valid + p .valid {
+        color: green;
+        display: inline-block;
+      }
+      input:invalid + p .invalid {
+        color: red;
+        display: inline-block;
+      }
+      input:user-valid + p .user-valid {
+        color: green;
+        display: inline-block;
+      }
+      input:user-invalid + p .user-invalid {
+        color: red;
+        display: inline-block;
+      }
+    </style>
+
+    <!-- --------------------------------------------------- -->
+
+    <script>
+      const input = document.querySelector("#input-1");
+
+      function inputSetCustomValidity() {
+        input.setCustomValidity("this is wrong");
+      }
+      function clearCustomValidity() {
+        input.setCustomValidity("");
+      }
+      function inputCheckValidity() {
+        console.log("inputCheckValidity", input.checkValidity());
+      }
+      function inputReportValidity() {
+        console.log("inputReportValidity", input.reportValidity());
+      }
+      function inputValidity() {
+        console.log(input.validity);
+      }
+      function logValidationMessage() {
+        console.log("logValidationMessage:", input.validationMessage);
+      }
+    </script>
+  </body>
+</html>
