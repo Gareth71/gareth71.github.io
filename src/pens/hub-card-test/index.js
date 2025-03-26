@@ -25,22 +25,29 @@ function handleDisclosureButtonClick(element) {
   element.setAttribute("aria-expanded", isOpen);
 }
 
-// function handleCardClick(element) {
-//   console.log("click");
-//   //   const link = element.querySelector("a");
-//   //   link.click();
-// }
+const allCards = [...document.querySelectorAll(".card")];
 
-// const cards = document.querySelectorAll(".card");
-// Array.prototype.forEach.call(cards, (card) => {
-//   let down,
-//     up,
-//     link = card.querySelector("h3 a");
-//   card.onmousedown = () => (down = +new Date());
-//   card.onmouseup = () => {
-//     up = +new Date();
-//     if (up - down < 200) {
-//       link.click();
-//     }
-//   };
-// });
+allCards.forEach((card) => {
+  const disapearingButton = card.querySelector("[data-disappearing-button]");
+  const disapearingButtonInList = card.querySelector(
+    "li > [data-disappearing-button]"
+  );
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          disapearingButtonInList.classList.remove("hideMe");
+        } else {
+          disapearingButtonInList.classList.add("hideMe");
+        }
+      });
+    },
+    {
+      root: card.querySelector(".button-limit"),
+      threshold: 0,
+    }
+  );
+
+  observer.observe(disapearingButton);
+});

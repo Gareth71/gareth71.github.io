@@ -359,40 +359,5 @@
         </li>
       </ul>
     </div>
-
-    <script>
-      const allCards = [...document.querySelectorAll(".card")];
-
-      allCards.forEach((card) => {
-        console.log(card);
-        const disapearingButton = card.querySelector(
-          "[data-disappearing-button]"
-        );
-        const disapearingButtonInList = card.querySelector(
-          "li > [data-disappearing-button]"
-        );
-        console.log(disapearingButton);
-
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              console.log(disapearingButtonInList);
-
-              if (!entry.isIntersecting) {
-                disapearingButtonInList.classList.remove("hideMe");
-              } else {
-                disapearingButtonInList.classList.add("hideMe");
-              }
-            });
-          },
-          {
-            root: card.querySelector(".button-limit"),
-            threshold: 0,
-          }
-        );
-
-        observer.observe(disapearingButton);
-      });
-    </script>
   </body>
 </html>
