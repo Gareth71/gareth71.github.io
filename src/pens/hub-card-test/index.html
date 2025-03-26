@@ -17,41 +17,6 @@
       <ul class="card-list" role="list">
         <li class="card" data-card>
           <div class="img-wrap">
-            <!-- <img src="monster-orange-foodie.svg" alt="" /> -->
-          </div>
-          <div class="content">
-            <div class="text">
-              <h3 class="card__title">
-                <a href="bbc.co.uk">Card title</a>
-              </h3>
-
-              <!-- <p class="card__sub-text">Sub title</p> -->
-              <!-- <div class="children">
-                <p>Additional text here</p>
-              </div> -->
-            </div>
-
-            <div class="button-wrap">
-              <!-- <button>Label</button> -->
-              <!-- <button>Longer label</button> -->
-              <!-- <div class="disclosure">
-                <button
-                  class="disclosure__button"
-                  aria-expanded="false"
-                  data-disclosure-button
-                >
-                  <img src="icon-menu-stacked-24.svg" alt="" />
-                </button>
-                <ul class="disclosure__List">
-                  <li><button>Action</button></li>
-                </ul>
-              </div> -->
-            </div>
-          </div>
-        </li>
-
-        <li class="card" data-card>
-          <div class="img-wrap">
             <img
               src="monster-orange-foodie.svg"
               height="180"
@@ -72,8 +37,10 @@
             </div>
 
             <div class="button-wrap">
-              <!-- <button>Label</button> -->
-              <!-- <button>Longer label</button> -->
+              <div class="button-limit">
+                <button>Button one</button>
+                <button id="disapearing-button">Button two</button>
+              </div>
               <div class="disclosure">
                 <button
                   class="disclosure__button"
@@ -83,77 +50,13 @@
                   <img src="icon-menu-stacked-24.svg" alt="" />
                 </button>
                 <ul class="disclosure__List">
-                  <li><button>Action</button></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <li class="card" data-card>
-          <div class="img-wrap">
-            <img src="monster-orange-foodie.svg" alt="" />
-          </div>
-          <div class="content">
-            <div class="text">
-              <h3 class="card__title">
-                <a href="bbc.co.uk">Card title</a>
-              </h3>
-
-              <p class="card__sub-text">Sub title</p>
-              <div class="children">
-                <p>Additional text here</p>
-              </div>
-            </div>
-
-            <div class="button-wrap">
-              <!-- <button>Label</button> -->
-              <button>Longer label</button>
-              <div class="disclosure">
-                <button
-                  class="disclosure__button"
-                  aria-expanded="false"
-                  data-disclosure-button
-                >
-                  <img src="icon-menu-stacked-24.svg" alt="" />
-                </button>
-                <ul class="disclosure__List">
-                  <li><button>Action</button></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <li class="card" data-card>
-          <div class="img-wrap">
-            <!-- <img src="monster-orange-foodie.svg" alt="" /> -->
-          </div>
-          <div class="content">
-            <div class="text">
-              <h3 class="card__title">
-                <a href="bbc.co.uk">Card title</a>
-              </h3>
-
-              <p class="card__sub-text">Sub title</p>
-              <div class="children">
-                <p>Additional text here</p>
-              </div>
-            </div>
-
-            <div class="button-wrap">
-              <!-- <button>Label</button> -->
-              <!-- <button>Longer label</button> -->
-              <div class="disclosure">
-                <button
-                  class="disclosure__button"
-                  aria-expanded="false"
-                  data-disclosure-button
-                >
-                  <img src="icon-menu-stacked-24.svg" alt="" />
-                </button>
-                <ul class="disclosure__List">
-                  <li><button>Action</button></li>
+                  <li>
+                    <button class="hideMe" id="disapearing-button-in-list">
+                      Button two
+                    </button>
+                  </li>
+                  <li><button>View product information</button></li>
+                  <li><button>Download product</button></li>
                 </ul>
               </div>
             </div>
@@ -161,5 +64,32 @@
         </li>
       </ul>
     </div>
+
+    <script>
+      const disapearingButton = document.querySelector("#disapearing-button");
+      const disapearingButtonInList = document.querySelector(
+        "#disapearing-button-in-list"
+      );
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+              console.log("Last item is out of view");
+              disapearingButtonInList.classList.remove("hideMe");
+              // Trigger your function here
+            } else {
+              disapearingButtonInList.classList.add("hideMe");
+            }
+          });
+        },
+        {
+          root: document.querySelector(".button-limit"),
+          threshold: 0,
+        }
+      );
+
+      observer.observe(disapearingButton);
+    </script>
   </body>
 </html>

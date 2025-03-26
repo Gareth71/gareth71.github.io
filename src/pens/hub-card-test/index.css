@@ -65,8 +65,8 @@ img {
 
 .content {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
   padding: var(--gap-5);
   gap: var(--gap-5);
   line-height: var(--line-height-120);
@@ -89,7 +89,7 @@ img {
 .button-wrap {
   /* padding-top: var(--gap-5); */
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   flex: 1 1 0;
   gap: var(--gap-2);
   align-content: flex-start;
@@ -182,4 +182,17 @@ a {
     inset: 0;
     /* background-color: green; */
   }
+}
+
+.button-limit {
+  display: flex;
+  gap: var(--gap-2);
+  flex-shrink: 1;
+  flex-wrap: wrap;
+  height: 80px;
+  overflow-y: hidden;
+}
+
+.hideMe {
+  display: none;
 }
