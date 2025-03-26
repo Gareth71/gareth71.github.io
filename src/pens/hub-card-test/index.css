@@ -40,7 +40,7 @@ img {
   background-color: var(--white100);
   /* width: fit-content; */
   max-width: 500px;
-  min-width: 250px;
+  min-width: 296px;
   min-height: 240px;
   box-shadow: var(--box-shadow-4);
   transition: 0.2s ease-in-out; /* only if prefers-reduced-motion: no-preference */
@@ -50,6 +50,10 @@ img {
 
   &:hover {
     scale: 1.016;
+  }
+
+  &:has([aria-expanded="true"]) {
+    z-index: 1;
   }
 }
 
@@ -121,14 +125,26 @@ button {
   }
 }
 
+button.transparent {
+  border-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: var(--gap-2);
+  /* img {
+  } */
+  &:hover {
+    background-color: var(--primary10);
+  }
+}
+
 button:nth-of-type(2) {
   /* margin-right: 20px; */
 }
-.button-wrap :last-child {
+/* .button-wrap :last-child {
   margin-left: auto;
   flex-grow: 0;
   align-self: flex-end;
-}
+} */
 
 .disclosure {
   position: relative;
@@ -159,6 +175,9 @@ button:nth-of-type(2) {
 .disclosure__List li {
   padding: var(--gap-2);
 }
+.disclosure__List button {
+  width: 100%;
+}
 
 .text {
   min-width: calc(100% - (var(--gap-5) + 76px));
@@ -187,10 +206,12 @@ a {
 .button-limit {
   display: flex;
   gap: var(--gap-2);
+  row-gap: var(--gap-5);
   flex-shrink: 1;
   flex-wrap: wrap;
   height: 80px;
-  overflow-y: hidden;
+  overflow: clip;
+  overflow-clip-margin: 4px;
 }
 
 .hideMe {
