@@ -75,9 +75,7 @@
         (entries) => {
           entries.forEach((entry) => {
             if (!entry.isIntersecting) {
-              console.log("Last item is out of view");
               disapearingButtonInList.classList.remove("hideMe");
-              // Trigger your function here
             } else {
               disapearingButtonInList.classList.add("hideMe");
             }
