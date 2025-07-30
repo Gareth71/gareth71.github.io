@@ -1,0 +1,28 @@
+.table-container {
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 600px;
+}
+
+caption {
+  caption-side: top;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
