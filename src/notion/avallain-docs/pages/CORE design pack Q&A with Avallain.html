@@ -1,0 +1,698 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CORE design pack Q&amp;A with Avallain</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="6fd63b0e-1f7a-415d-87da-5d3087a5c5f9" class="page sans"><header><h1 class="page-title">CORE design pack Q&amp;A with Avallain</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><div data-testid="/icons/clock_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/clock_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/clock_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Created</th><td><time>@September 20, 2022 9:30 PM</time></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><div data-testid="/icons/list_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/list_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/list_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Type</th><td><span class="selected-value select-value-color-purple">Info</span></td></tr></tbody></table></header><div class="page-body"><p id="fe0049ad-4aca-40b3-9b51-7c4f16c02e80" class="">New OUP repository for CORE</p><p id="a65246d6-fd3f-4d2b-aad1-04bb4ea05abf" class="">
+</p><p id="2a69f94d-2828-4305-ac64-e05addd7748b" class="">
+</p><p id="08e7e136-7937-4581-aa15-b43855d0cd31" class="">
+</p><p id="4ed3ce8a-6725-4d6d-886a-bf5826f3abac" class="">Notes from looking through a core design pack and then the meeting with Avallain</p><h1 id="f29d8af3-5df1-48b6-b2b6-c30ae1c7b864" class="">Questions</h1><p id="cc5273a5-75f9-4cc8-820f-08c667e36f1d" class="">Q: What are the plans for React? Currently seems to be mixture of different technologies. Handlebars, jQuery, jQuery UI, Less.</p><p id="e29e30c9-b70c-4cdd-91bc-f7d2f958d10f" class="">R: move towards React but roll out is a work in progress for now using React will result in bigger file sizes as react will also have to be downloaded.</p><p id="6c8b90b9-b3bf-48ce-b6c0-eb8ea10c142f" class="">
+</p><p id="4c893325-92fc-428e-b730-c34c5b6eee51" class="">What does the main JS bind to?</p><p id="c583d6c7-41a7-4a1f-bbed-220b65861cf8" class="">
+</p><p id="98fc6114-1962-4feb-91cb-147ceff6e31e" class="">Node 14.7 2021 05-08</p><p id="7a81433e-cf84-40cd-8e07-59612eef63b0" class="">
+</p><p id="b6e5b50f-cde7-4047-a6a3-4c503441a840" class=""><strong>build</strong></p><p id="47b899e8-dee4-4381-ae89-fc6d7d572b30" class="">Q: Is A1 replaced with React or do we end up with the user downloading two libraries?</p><p id="b91dc007-177a-4c0c-8141-05d734e6406c" class="">R: Both</p><p id="6e10ba4a-6ed0-4f95-a13a-82070bb91e76" class="">
+</p><p id="4329a41a-c8d9-4d33-9698-1b06bbc19278" class=""><strong>css</strong></p><p id="12ed8fdd-e723-4f06-94d7-01e0449012a1" class="">-</p><p id="6e25d2dd-ca85-4d73-b420-12f7c51e73a7" class=""><strong>engineBootstrap</strong></p><p id="5d28b3a6-19f4-41ce-89f1-e4a506dbc101" class="">CSS and HTML to use during loading</p><p id="05b67382-0862-4495-ac4d-082ad4ee01a3" class="">
+</p><p id="f7706946-a5d2-4d77-8721-2fee4a971498" class=""><strong>fonts</strong></p><p id="ea11c58c-1790-4d31-ae9c-184641c912e3" class="">Q: Can we opt out of using font icons<div class="indented"><p id="dca5ff4e-eb6b-4b86-bf38-f883f7c93f39" class="">R: Yes if we want to</p></div></p><p id="1050d306-a259-4f6b-83ad-4fe4a8201b8c" class="">Q: What is the process for creating the font for the font icons?<div class="indented"><p id="b2880a7a-7da9-4f4b-8ab8-775ba4afedc9" class="">R: Should be in the latest documentation. Access iconmoon and make changes. Follow the naming procedure and if you replace an existing icon the reference will still match up.</p></div></p><p id="686e3d1b-5c8b-4687-8ebf-dc202be633cf" class="">
+</p><p id="05e4b9fb-7d65-4d15-a4ad-81a8e30e0f94" class=""><strong>images</strong></p><p id="e182fdf1-688d-4093-b8e0-f4e3ab8a05bf" class="">Q: Are images for items that require multiple colours?</p><p id="924ac2be-91f2-4188-8d2b-25b83aa67e4a" class="">
+</p><p id="3dbc350e-4f33-4696-907d-58cc6dabe68b" class=""><strong>js</strong><div class="indented"><p id="881e8b18-bb79-4d40-87ec-607b02df2e07" class=""><strong>components</strong></p><p id="8ab84c64-5c93-4af6-8f8a-88acf190e670" class="">Q: are these different to the React components?</p><p id="2f4332c9-e5ab-467d-80a9-343ccc866b60" class=""> <strong>interactions</strong></p><p id="fceca0d1-3d93-4ac2-a3b1-eb6288335d18" class="">Q: why only 4?</p><p id="dec0d19d-5c2e-4a02-ae37-2fd566906ee8" class="">Q: What is different between these and legacy?</p><p id="acc7df7f-7c01-4ccb-a64e-73161c4868c6" class=""><strong>legacy</strong><br/>Q: Will these be converted into interactions at a later date?<br/></p><p id="490e0d3d-ec60-4a8a-89ac-6728994f4740" class=""><strong>thirdpart</strong><div class="indented"><p id="8752ba04-6263-4a55-8ddd-598fd7a570af" class=""><strong>webfontloader</strong></p></div></p><p id="be844b2b-9e2d-4fc8-a5a3-84d2ca19b3e8" class=""><strong>client.js</strong><div class="indented"><p id="2c1d9697-cbfe-4c8c-a623-06a2d55d81e4" class="">Q: Is jQuery still being used, what for? I cant see it being loaded here </p></div></p><p id="cce40798-75ed-440d-9f34-c7fd16148a34" class=""><strong>config.js</strong><div class="indented"><p id="3eba8e24-be2c-4cbd-b5fe-bb6945b38621" class="">variables</p></div></p><p id="9ae08fcb-1b7e-451a-8d8e-f97d71ae3261" class=""><strong>device.js</strong><div class="indented"><p id="347ed904-4561-44e0-8d3b-14df715def9b" class="">Q: Why are we device sniffing?<br/>Q: What do we do differently for tablets and phones?<br/></p><p id="97cb56d9-5600-4426-a0b4-8ec93583145a" class="">R: Mainly for bug fixing eg Safari doesn’t play nice with iFrames</p><p id="1c92b403-037f-4c29-94d8-ed952f76dd5e" class="">
+</p></div></p><p id="3ba515bd-dc86-4f8a-9958-1c99034e454d" class=""><strong>fonts.js</strong><div class="indented"><p id="8dd0f887-cd12-4047-acc3-d13c345db5a9" class="">loads sprite font “avallainico”<br/>Q: Is this icomoon from /fonts?<br/></p></div></p><p id="511615ef-18c3-4eba-8999-82b672e9014f" class=""><strong>html-document.js</strong><div class="indented"><p id="5653f9db-2dfe-4278-a543-7219f9e0cdae" class="">Looks like a form on init for global items</p><p id="f8d258ae-c5bf-44c9-8c8e-492d01b70edc" class="">Q: Why are we setting the viewportHeight on mobile? and height on the document and other items? </p><p id="2ccae367-1b34-4d16-8a16-02fdb8b6811d" class="">R: Could be the iFrame issue but I am not convinced.</p></div></p><p id="8f5a355f-dc26-4578-b4d4-1f2208d51530" class=""><strong>learning-object.js</strong><div class="indented"><p id="a052ce85-6277-4436-ae8c-a30c9b77f13d" class="">Looks like LO level init</p></div></p></div></p><p id="8c5d858f-bf01-41b3-a914-24896f9fbc65" class=""><strong>less</strong><div class="indented"><p id="ce357d70-1f3e-4330-99cd-59d7acbbcbb9" class="">Q: What does the following syntax do? </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="bab350ae-3992-4dd8-9016-0e78c6d52a82" class="code code-wrap"><code class="language-Less" style="white-space:pre-wrap;word-break:break-all">@audioRecorder: {};
+@_audioRecorder: {
+  display: inline-flex;
+
+  @audioRecorder();
+};</code></pre><p id="33a90b7a-528e-4778-a1e7-e67614aaae4d" class="">R: <div class="indented"><p id="c8af74ff-aaed-438a-b608-c313384adeae" class="">@audioRecorder is the public rule set</p><p id="e035c4f4-b3f7-4130-beff-2c5266af481c" class="">@_audioRecorder is the private version</p><p id="8d9f79b0-fe7a-4dda-9fdf-43100991a08f" class="">@audioRecorder() adds the contents of the public into the private</p><p id="b4fde928-3632-48d2-a851-ab2a47c6f44f" class=""> </p></div></p><p id="ee29069c-d19c-4298-b8c7-08b082a72278" class=""><strong>components</strong></p><p id="39c346a4-9b7f-43a7-945f-35c29562c272" class=""><strong>engine</strong></p><p id="73f625c7-9025-4685-a76a-cac02704b3ec" class=""><strong>interactions</strong></p><p id="5b698988-68cc-4e11-8cb0-53c66435dbaf" class="">Q: What is the difference between interactions and components?</p><p id="21c4e650-e363-4844-9676-9791895d2b14" class=""><strong>layout</strong><div class="indented"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="6e21e6d0-c22a-4b98-8ac7-cb0760a3b353" class="code code-wrap"><code class="language-Less" style="white-space:pre-wrap;word-break:break-all">html {font-size: 62.5%;}
+body {font-size: 1.6em;}</code></pre><p id="000a093e-c6e0-4e41-bc9f-3b2ea289a46e" class=""><a href="https://www.aleksandrhovhannisyan.com/blog/62-5-percent-font-size-trick/">https://www.aleksandrhovhannisyan.com/blog/62-5-percent-font-size-trick/</a></p></div></p><p id="c796ca98-b301-4611-b94f-258ea8dd6810" class=""><strong>lib</strong><div class="indented"><p id="ba99d57b-a725-4e60-89cd-24e2076c77e8" class="">Q: Why have a different version of normalize.less here from layout/<br/>One is Avallain own version<br/></p></div></p><p id="493742c9-cb67-427e-b4c3-b48fed8c0750" class=""><strong>partials</strong><div class="indented"><p id="4b6dd43f-0c26-4509-b64e-5e994b45c95d" class="">Still using breakpoints xs s  m l xl</p></div></p><p id="e2de4108-f55b-4b1f-ab04-5f146c12c1a2" class=""><strong>core.less</strong><div class="indented"><p id="d00087f6-a218-4c34-966e-ba96ed35add6" class="">only imports</p></div></p></div></p><p id="c9a57b89-f534-49c9-ae6c-2d2188567221" class=""><strong>locales</strong></p><p id="afb458be-12d3-4e79-9bdb-8ffc89223810" class=""><strong>react</strong></p><p id="7a48165a-2daf-4863-8794-f6eb82d3bf7b" class=""><strong>resources</strong><div class="indented"><p id="b74796ed-a9fa-469d-a1af-13e9bd1fa3eb" class="">Things for creation of design pack but not actually used in it</p></div></p><p id="2d736cb2-0aa9-4494-bdde-a40149472e18" class=""><strong>skinTemplates</strong><div class="indented"><p id="4d97baa4-d3ad-4954-87ef-f3d3a14203ef" class="">handlebars files</p></div></p><p id="e7068389-7da2-4eac-8f28-bbb7311bc10f" class=""><strong>templates</strong></p><p id="23d6b82e-c2b1-4c85-9ab6-59b920333eae" class=""><strong>body.html</strong></p><p id="82a981e8-33d0-4c30-b613-5d2b21d9efa5" class=""><strong>config.xml</strong></p><p id="bd1bcd10-50b3-4166-b1b8-11ff25eadebe" class=""><strong>head.html</strong></p><p id="17761289-8325-4403-9aca-b3d7533e9c18" class=""><strong>static-files.txt</strong></p><p id="9e7feade-7a94-48c2-ba1b-14568fed7365" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">readme.md</summary><div class="indented"><h1 id="e6ef412d-b89a-4bc8-b861-4a0589c0021a" class="">DP React Components Build Process</h1><p id="1d28e6c6-d4cd-433e-b96a-955da826a72a" class="">In <em>summary</em> React Build process will analyze the <strong>config.json</strong>, copy the React components that are not implemented (overwrite) on the actual DP from their ancestors, create a bundle library with all components, and clean the copied components from actual DP.</p><h1 id="c559f45e-4945-4781-9386-a0efe18a39a7" class="">Configure DP to use React Activities</h1><p id="c64592ea-171b-4ddd-b6a3-5f0245195351" class="">To configure a DP to use React Component, <strong>even when not overwritting then</strong>, the DP should have: </p><ul id="f39590b6-b080-4247-8765-4e522bd6b8f5" class="bulleted-list"><li style="list-style-type:disc">Build configuration Files <strong>(copy from Core)</strong><ul id="4cfa0af2-775e-43c2-a3fe-fb3101aa7fbe" class="bulleted-list"><li style="list-style-type:circle"> - /package.json </li></ul><ul id="77013e11-b7ab-464e-847c-d7013ca19cb6" class="bulleted-list"><li style="list-style-type:circle">- /package-lock.json </li></ul><ul id="681968c4-b86f-4a87-b47c-19f12fc34db1" class="bulleted-list"><li style="list-style-type:circle">- /webpack.config.js </li></ul><ul id="620d7a89-e566-40de-8092-60506b77d62a" class="bulleted-list"><li style="list-style-type:circle">- /.babelrc </li></ul></li></ul><ul id="bf58910f-77fb-4c6d-8d20-367fea11beb5" class="bulleted-list"><li style="list-style-type:disc">React Folder: <strong>(copy react folder and index.js)</strong> <ul id="a6c81687-f2a8-413d-b21c-1cab73e5421f" class="bulleted-list"><li style="list-style-type:circle">- /react/ </li></ul><ul id="bfae2802-a33a-440b-bbba-2400d634c24b" class="bulleted-list"><li style="list-style-type:circle">- /react/index.js </li></ul></li></ul><blockquote id="58154095-a346-4c49-b073-e3714c094798" class="">Do not change the <strong>/react/index.js</strong>, that file <strong>should always have all the react components</strong> overwritten or not. There you should have all the components and imports as it on root DP (<em>Core</em>) </blockquote><ul id="7bcc8801-b749-47e3-91c4-aee82239f09e" class="bulleted-list"><li style="list-style-type:disc">Build Folder <strong>(copy from core)</strong> <ul id="372afff1-8891-4700-87c6-38eff858f24f" class="bulleted-list"><li style="list-style-type:circle">/build/ </li></ul><ul id="3637bfcc-946e-451e-82ce-e66825be1d99" class="bulleted-list"><li style="list-style-type:circle"> /build/build-react.js </li></ul><ul id="b90eff51-d0d3-4772-8495-7d256073ebe0" class="bulleted-list"><li style="list-style-type:circle">/build/utils.js </li></ul><ul id="dabab745-a588-4241-9fa3-3ccd7b14bf29" class="bulleted-list"><li style="list-style-type:circle">/build/config.json <strong>(to configure refer to config.json section below)</strong></li></ul></li></ul><h2 id="1da7cd36-fa6c-46b5-9cb7-5c53aab48715" class="">config.json</h2><p id="c0ec21e9-6630-4cac-a0bd-d3a8342f20d5" class="">DP need to have a config.json with the <strong>components</strong> array where DP indicates the React Components that are implemented or overwritten in current DP (Core should have all components).</p><p id="2d627cdb-0bdb-47ea-be79-47acf1b074cd" class="">If the DP use react component but do not overwrite them (the JSX), just add an empty array to the components variable:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1729bc8e-a96f-4325-8951-c27b1488a244" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">{    &quot;components&quot;: []}</code></pre><p id="65f14d97-0b88-4120-bf9e-cb7b3c046f64" class="">If DP overwrite some react component logic, just add the path of the overwritten components to config.json variable, for example:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="e11d3508-8436-418a-911c-4f255e6eec25" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">{    &quot;components&quot;: [&quot;activities/ICCrossword&quot;, &quot;CompC&quot;]}</code></pre><p id="c26dea03-8112-4c38-b075-c24b15a11834" class="">As said the script will copy from Core the React components that are not overwritten on the DP and create a bundle with the ones present on the config.json.</p><h1 id="2b1c3d59-010a-4d47-a76b-c40db670192c" class="">Build Process</h1><p id="98bbd3f2-f5fb-472b-aeb1-22ddc7f3bd2a" class="">Once the DP is correctly configure you can compile it using <strong>Ambros</strong>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="f5a0bcf0-6ad4-4f35-861f-795a178df12b" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">ambros compile</code></pre><p id="95f4ee34-785b-49cf-8457-8aae847fecc1" class="">For a manual build follow the instructions below</p><ol type="1" id="c043836a-6c11-4b68-8c05-bd42408bf616" class="numbered-list" start="1"><li>Install necessary Node Modules <code>npm ci</code></li></ol><ol type="1" id="3fab1123-91e0-4d8a-81d9-117a9224167f" class="numbered-list" start="2"><li>Configure <strong>config.json</strong> as explained.</li></ol><ol type="1" id="4e22b752-7b02-4520-b777-4c3a48a6590b" class="numbered-list" start="3"><li>Run the build script, use the <strong>ancestors</strong> parameter as Array with the paths of DP ancestors (<strong>order is important</strong>, from the most distant ancestor to the closest):<ul id="b35056db-4bc9-4354-94bd-55e83a2711a5" class="bulleted-list"><li style="list-style-type:disc"><code>npm run react:build</code> for production</li></ul><ul id="6ac6e886-458e-4b49-8407-a9c0fa802802" class="bulleted-list"><li style="list-style-type:disc"><code>npm run react:build:dev</code> for development</li></ul><ul id="c2719b3e-06f5-4048-9482-7ecea81bdb04" class="bulleted-list"><li style="list-style-type:disc"><code>npm run react:build -- --ancestors ../root ../child-1</code> production with ancestors</li></ul><ul id="2af2476d-7b49-4d99-b3ba-76262c4ab2a5" class="bulleted-list"><li style="list-style-type:disc"><code>npm run react:build:dev -- --ancestors ../root ../child-1</code> development with ancestors &gt; Compiled react library will be located at <strong>/tmp/compileddp/react</strong> as the other compiled files.</li></ul></li></ol><blockquote id="5c501a94-acc4-4b45-8396-44e944503ad8" class="">Alternative you can use ambros compile, that will analyze the ancestors and compile React for the folder where is executed</blockquote></div></details></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

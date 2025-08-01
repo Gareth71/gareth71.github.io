@@ -1,0 +1,474 @@
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Avallain Author designpack compiler setup</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+  <article class="page sans">
+    <div class="page-body">
+      <details >
+        <summary style="
+              font-weight: 600;
+              font-size: 1.875em;
+              line-height: 1.3;
+              margin: 0;
+            ">
+          Pre-requirements
+        </summary>
+        <div class="indented">
+          <ol class="numbered-list" start="1">
+            <li>
+              Development tools
+              <ul class="bulleted-list">
+                <li style="list-style-type: disc">Node.js (LTS version)</li>
+              </ul>
+              <ul class="bulleted-list">
+                <li style="list-style-type: disc">
+                  Openssl (latest stable version)
+                </li>
+              </ul>
+              <ul class="bulleted-list">
+                <li style="list-style-type: disc">
+                  git (latest stable version)
+                </li>
+              </ul>
+              <p>
+                I use HomeBrew to add these to my Mac
+              </p>
+              <p></p>
+            </li>
+          </ol>
+          <ol class="numbered-list" start="2">
+            <li>
+              An Avallain Gitlab account with access to the following
+              repositories
+              <ul class="bulleted-list">
+                <li style="list-style-type: disc">
+                  <a href="https://git.avallain.com/tools/ambros">https://git.avallain.com/tools/ambros</a>
+                </li>
+              </ul>
+              <ul class="bulleted-list">
+                <li style="list-style-type: disc">
+                  <a
+                    href="https://git.avallain.com/author/designpacks_compiler">https://git.avallain.com/author/designpacks_compiler</a>
+                </li>
+              </ul>
+              <ul class="bulleted-list">
+                <li style="list-style-type: disc">
+                  <a
+                    href="https://git.avallain.com/tools/designpacks_viewer">https://git.avallain.com/tools/designpacks_viewer</a>
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <p></p>
+          <ol class="numbered-list" start="3">
+            <li>
+              An SHH Key pair set up with your machine and GitLab
+              <p>
+                Generate an SSH key pair (Avallain) use the ed25519 not RSA
+              </p>
+              <p>
+                <a href="https://git.avallain.com/help/user/ssh.md">https://git.avallain.com/help/user/ssh.md</a>
+              </p>
+              <p>
+                Generate a key
+                <code>ssh-keygen -t ed25519 -C “</code><code><em>gareth.riddiford@oup.com”</em></code><br />Copy key
+                <br /><code>tr -d &#x27;\n&#x27; &lt; ~/.ssh/id_ed25519.pub | pbcopy<br /><br /></code>Test key
+                <code>ssh -T git@git.avallain.com</code>
+              </p>
+              <p></p>
+              <p>
+                Add your SSH key to GitLab
+              </p>
+              <p>
+                <a href="https://git.avallain.com/help/user/ssh.md">https://git.avallain.com/help/user/ssh.md</a>
+              </p>
+            </li>
+          </ol>
+          <p></p>
+          <ol class="numbered-list" start="4">
+            <li>
+              Acces to OUPs Bitbucket repository so you can clone design packs
+              <ul class="bulleted-list">
+                <li style="list-style-type: disc">
+                  <a
+                    href="https://bitbucket.org/awsdlp/author-design-packs/src/master/">https://bitbucket.org/awsdlp/author-design-packs/src/master/</a>
+                </li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+      </details>
+
+      <details open="">
+        <summary  class="h1">Node</summary>
+
+        <div class="indented">
+
+          <p>Avallain use an old version of Node so we need to install it with NVM.</p>
+          <pre class="code code-wrap"><code>nvm install 16.1.0
+nvm use 16.1.0</code></pre>
+
+        </div>
+      </details>
+
+
+
+
+      <details open="">
+        <summary class="h1">Environment set up</summary>
+
+        <div class="indented">
+
+          <details open="">
+            <summary class="h2"> Initial set up with Ambros</summary>
+
+            <div class="indented">
+              <ol>
+                <li>
+                  <p>Make sure you are using node 16.1.0 by running.</p>
+                  <pre class="code code-wrap"><code>nvm ls</code></pre>
+                  <p>Installed versions of Node should be listed with an arrow pointing to the version you are using.</p>
+                </li>
+
+                <li>
+                  <p>Install yarn</p>
+                  <pre class="code code-wrap"><code>npm install -g yarn</code></pre>
+                </li>
+
+                <li>
+                  <p>Create folders</p>
+                  <pre class="code code-wrap"><code>mkdir -p ~/code/avallain/tools
+cd ~/code/avallain/tools</code></pre>
+                </li>
+
+                <li>
+                  <p>install ambros, this requires access to Avallains git repository, rather than cloning this Gareth can clone the latest version and give it to you</p>
+                  <pre class="code code-wrap"><code>git clone git@git.avallain.com:tools/ambros.git
+cd ambros
+git checkout develop</code></pre>
+                </li>
+
+                <li>
+                  <p>Install ambros dependencies and create a yarn link so the ambros command will be available globally</p>
+                  <pre class="code code-wrap"><code>yarn install && yarn link</code></pre>
+                  <p>You might get this error</p>
+
+                  <pre class="code code-wrap"><code>yarn install v1.22.19
+[1/4] 🔍  Resolving packages...
+[2/4] 🚚  Fetching packages...
+error An unexpected error occurred: &quot;https://registry.yarnpkg.com/eslint/-/eslint-6.8.0.tgz: unable to get local issuer certificate&quot;.
+info If you think this is a bug, please open a bug report with the information provided in &quot;/Users/riddifog/code/avallain/tools/ambros/yarn-error.log&quot;.
+info Visit https://yarnpkg.com/en/docs/cli/install for documentation about this command.</code></pre>
+
+                  <details>
+                    <summary>Solutions</summary>
+
+                    <div class="indented">
+                    <p>
+                      This is caused by the certificate authority (CA) used by your
+                      company is not recognized by Node.js. <a src="https://stackoverflow.com/questions/29283040/how-to-add-custom-certificate-authority-ca-to-nodejs">See Stack Overflow</a>
+                    </p>
+                    <figure class="block-color-gray_background callout">
+
+                        
+
+                        <ol class="numbered-list">
+                          <p> The solution is to add the CA certificate to your Node.js environment.</p>
+                          <li>
+                            <p>Export the Cisco Umbrella Root CA certificate from Keychain Access</p>
+                            <img src="../images/cisco-root.png" />
+                          </li>
+
+                          <li><p>Add it to your home directory</p></li>
+
+                          <li>
+                            <p>Added the following to your .zshrc file.</p>
+                            <pre class="code code-wrap"><code>export NODE_EXTRA_CA_CERTS=~/Cisco_Umbrella_Root_CA.cer</code></pre>
+                            </pr>
+                          </li>
+                        </ol>
+
+                    </figure>
+                    </div>
+
+                  </details>
+                </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <li>
+                <p>Create a symbolic link </p>
+                <pre class="code code-wrap"><code>ln -s ~/.config/yarn/link/@avallain/ambros/bin/cli.js ambros</code></pre>
+              </li>
+
+              <li>
+                <p>Add yarn and the link to your path so we can access them globally. In your ~/.zshrc file add the following code</p>
+                <details>
+                    <summary>Show code</summary>
+
+                    <pre class="code code-wrap"><code># auto switch NVM
+# https://www.tempertemper.net/blog/using-nvm-on-macos
+# Adapted to handle Yarn path and parent .nvmrc resolution
+find_installed_node_version_upwards() {
+  local dir="$PWD"
+  while [[ "$dir" != "/" ]]; do
+    if [[ -f "$dir/.nvmrc" ]]; then
+      local version=$(<"$dir/.nvmrc" | tr -d '[:space:]')
+      local resolved_version=$(nvm version "$version")
+      if [[ "$resolved_version" != "N/A" ]]; then
+        echo "$version"
+        return
+      fi
+    fi
+    dir=$(dirname "$dir")
+  done
+}
+
+load-nvmrc() {
+  local current_node="$(nvm version)"
+  local yarn_path="$HOME/.yarn/bin"
+  local dir="$PWD"
+  local requested_version=""
+  local resolved_version=""
+
+  # Remove Yarn path if it's already in PATH
+  export PATH=$(echo "$PATH" | awk -v RS=: -v ORS=: '$0 != "'"$yarn_path"'"' | sed 's/:$//')
+
+  # Check for local .nvmrc
+  if [[ -f "$dir/.nvmrc" ]]; then
+    requested_version=$(<"$dir/.nvmrc" | tr -d '[:space:]')
+    resolved_version=$(nvm version "$requested_version")
+
+    if [[ "$resolved_version" = "N/A" ]]; then
+      # Try to find a parent .nvmrc with an installed version
+      local fallback_version=$(find_installed_node_version_upwards)
+      if [[ -n "$fallback_version" && "$fallback_version" != "$requested_version" ]]; then
+        echo "⚠️  Node version $requested_version is not available. Switching to parent version $fallback_version"
+        nvm use "$fallback_version" > /dev/null
+        resolved_version=$(nvm version "$fallback_version")
+      else
+        echo "⚠️  Node version $requested_version is not available. Continuing with $current_node"
+        resolved_version="$current_node"
+      fi
+    elif [[ "$resolved_version" != "$current_node" ]]; then
+      nvm use "$requested_version" > /dev/null
+    fi
+  else
+    # No .nvmrc in current dir, try to find any installed one up the tree
+    local fallback_version=$(find_installed_node_version_upwards)
+    if [[ -n "$fallback_version" ]]; then
+      if [[ "$(nvm version)" != "$(nvm version "$fallback_version")" ]]; then
+        echo "Using parent .nvmrc version $fallback_version"
+        nvm use "$fallback_version" > /dev/null
+        resolved_version=$(nvm version "$fallback_version")
+      fi
+    elif [[ "$current_node" != "$(nvm version default)" ]]; then
+      echo "Reverting to nvm default version"
+      nvm use default > /dev/null
+    fi
+  fi
+
+  # Add Yarn path only for Node 16.1.0
+  if [[ "$resolved_version" == "v16.1.0" ]]; then
+    export PATH="$PATH:$HOME/.yarn/bin"
+    export PATH="$PATH:$(yarn global bin)"
+    echo "Yarn path added for Node $resolved_version"
+  fi
+}
+
+autoload -U add-zsh-hook
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+
+# end - auto switch NVM</code></pre>
+                </details>
+                <p>
+                  This will automatically switch the version of node you are using based on .nvmrc files. It will also make the link
+                  to ambros available if you are using Node 16.1.0.
+                </p>
+              </li>
+
+
+              <li>
+                <p>Add a .nvmrc in the avallain folder so all the design packs know to use 16.1.0.</p>
+                <pre class="code code-wrap"><code>echo "16.1.0" > ~/code/avallain/.nvmrc</code></pre>
+                <p>Some design packs contain an outdated .nvmrc file. Our .zshrc code will ignore .nvmrc files for versions of Node that are not installed and instead search parent folders.</p>
+              </li>
+
+              <li>
+                <p>Test ambros can be located</p>
+                <pre class="code code-wrap"><code>ln -s ~/.config/yarn/link/@avallain/ambros/bin/cli.js ambros</code></pre>
+                <p>You should see a number like 2.3.3</p>
+              </li>
+
+              </ol>
+
+              <h2>
+                Post install
+              </h2>
+
+              <ol>
+
+                <li>
+                  <p>
+                    Create a folder for our design packs and clone them.
+                  </p>
+                  <pre class="code code-wrap"><code>mkdir -p ~/code/avallain/author/designpacks
+    cd ~/code/avallain/author/designpacks
+    git clone https://github.com/OUP2/elt-avallain-core-dps.git child1
+    git clone https://github.com/OUP2/elt-avallain-core-dps.git child2
+    </code></pre>
+                  <p>
+                    This will create folders called child1 and child2 which will be used as children of the root design pack.
+                  </p>
+                </li>
+
+                <li>
+                  <p>unzip a design pack from Avallain and place it at the
+                    same level as the child folders. Rename it root</p>
+                </li>
+
+                <li>
+                  <p>Ask ambros to set everything up</p>
+                  <pre class="code code-wrap"><code>ambros setup --client</code></pre>
+    
+                  <p>If it works you should see links to all the designpacks in the dp folder</p>
+                  <img src="../images/dp-folder.png" />
+                  <p>I have yet to get it to work flawlessly, so check through the <strong>Manually set up</strong>
+                    section to see if everything is in place.</p>
+                </li>
+
+              </ol>
+
+              <p>
+                Alex needed to add a file called user.json in the
+                ambros/src/config directory like this to get ambros to work. Adjust the path to suit your machine.
+              </p>
+              <pre class="code code-wrap"><code>{&quot;setupPath&quot;:&quot;/Users/riddifog/code/avallain/author&quot;,&quot;client&quot;:true,&quot;children&quot;:2}</code></pre>
+            </div>
+          </details>
+
+
+
+
+          <details open="">
+
+            <summary class="h2"> Manually corections</summary>
+
+            <div class="indented">
+              <p>This is how to add an extra design pack manually but you can also use it to identify where ambros might
+                have failed</p>
+
+              <ol class="numbered-list">
+                <li>
+                  <p>Your dps should have already been added from the initial set up, but if you need an extra child dp you can do it like this.</p>
+                  <pre class="code code-wrap"><code>cd ~/code/avallain/author/designpacks
+git clone https://github.com/OUP2/elt-avallain-core-dps.git child3</code></pre>
+                </li>
+
+                <li>
+                  <p>Go to the designpacks folder</p>
+                  <pre class="code code-wrap"><code>cd ~/code/avallain/author/designpacks</code></pre>
+
+
+
+              <p>
+                Inside each of the folders, root, child1, child2, child3 etc.
+              </p>
+              <ul class="bulleted-list">
+                <li style="list-style-type: disc">
+                  make a new folder called tmp,
+                </li>
+              </ul>
+              <ul class="bulleted-list">
+                <li style="list-style-type: disc">
+                  inside tmp make a folder called compileddp.
+                </li>
+              </ul>
+              </li>
+</ol>
+
+
+                <p>Add <strong>Symlinks</strong> to the DPs so they can inherit from each other</p>  
+
+              <ol class="numbered-list" start="1">
+                <li><p>Go to the dp folder inside viewer</p>
+                  <pre class="code code-wrap"><code>cd ~/code/avallain/author/viewer/dp</code></pre>
+
+
+
+              <p>If ambros failed to create them you can do them all at once like this</p>
+              <pre class="code code-wrap"><code>ln -s ~/code/avallain/author/designpacks/root root
+ln -s ~/code/avallain/author/designpacks/root/tmp/compileddp root-compiled
+ln -s ~/code/avallain/author/designpacks/child1/tmp/compileddp child1
+ln -s ~/code/avallain/author/designpacks/child2/tmp/compileddp child2
+</code></pre>
+              <p>Or if you are adding an extra child you can do it like this</p>
+              <pre class="code code-wrap"><code>cd ~/code/avallain/author/viewer/dp
+ln -s ~/code/avallain/author/designpacks/child3/tmp/compileddp child3</code></pre>
+
+                </li>
+              </ol>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <details open="">
+        <summary class="h1">Compiling a DP</summary>
+
+        <div class="indented">
+          <p>To compile a dp, first set up the inheritance chain. Starting with root make sure it contains the correct unzipped folder from avallain. 
+            Then cd into each child dp and check out the required branch</p>
+          <pre class="code code-wrap"><code>cd ~/code/avallain/author/designpacks/child1
+git checkout ELT_Shared
+cd ~/code/avallain/author/designpacks/child2
+git checkout ELT_Shared_Primary</code></pre>
+
+          <p>Once you have reached the the dp you want to compile and have checked out its branch, ask ambros to compile it.</p>
+          <pre class="code code-wrap"><code>ambros compile</code></pre>
+          <p>
+            The compiled design pack will appear inside the childs
+            <strong>tmp/compileddp</strong> folder.
+          </p>
+          <p>If the DP fails to compile you should see the location were it failed in the terminal</p>
+          </div>
+
+      </details>
+
+    </div>
+  </article>
+</body>
+
+</html>

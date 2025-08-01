@@ -1,0 +1,689 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Avallain over-view</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="b7e70f8a-2dd8-494b-97ad-9e540d557b8d" class="page sans"><header><h1 class="page-title">Avallain over-view</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><div data-testid="/icons/clock_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/clock_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/clock_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Created</th><td><time>@May 19, 2022 2:12 PM</time></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><div data-testid="/icons/list_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/list_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/list_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Type</th><td><span class="selected-value select-value-color-purple">Info</span></td></tr></tbody></table></header><div class="page-body"><h2 id="4fd84a46-c363-4b9e-9e3c-375ff17ce34f" class="">Prep</h2><ul id="818ed3ac-690f-49ed-95b1-706c796349a1" class="bulleted-list"><li style="list-style-type:disc">Tower with BitBucket repository in</li></ul><ul id="827eadac-a7e8-4880-a0f6-237bb917302c" class="bulleted-list"><li style="list-style-type:disc">Author Stage with Admin account for compilation</li></ul><ul id="1a3f55ff-2a95-4b2c-9d46-1675b88aea82" class="bulleted-list"><li style="list-style-type:disc">VS Code with Avallain Base in and VS Code with Practice Kit in</li></ul><hr id="a866b477-eeab-4d52-8302-9fe878e89835"/><h2 id="a3a259ac-6965-48fd-8673-531f0f447e4a" class="">Code base</h2><ol type="1" id="b7ad45c8-9e1c-4592-bd02-bee8d282f315" class="numbered-list" start="1"><li><strong>Author: </strong>Online editing tool, that creates LOs</li></ol><ol type="1" id="82109a9c-9c66-4996-964d-c3606cdb02df" class="numbered-list" start="2"><li><strong>Engine:  buckminster </strong>Also called player, and is responsible for making learning objects work in the browser.</li></ol><ol type="1" id="aca83366-7269-4c21-8e44-4fc2aa7a9436" class="numbered-list" start="3"><li><strong>Compiler  ambros </strong>Converts design-packs into a format the engine can use.</li></ol><ol type="1" id="2ddf81e8-ee91-44c6-99bf-8545c8a2bd9c" class="numbered-list" start="4"><li><strong>Design Packs:</strong> <strong>Avallain Base </strong>HTML/CSS/Javascript/images/fonts that gives an LO the desired look and feel</li></ol><h2 id="4273fb43-b35a-485e-ad2d-ea9c0ed7a12f" class="">Code releases</h2><p id="1b6825fc-184a-4506-9cb3-72173e9aadd8" class="">Avallain have a 12 week cycle</p><ul id="6913894f-011b-4e76-b88a-fc1e39ff3f81" class="bulleted-list"><li style="list-style-type:disc">2 releases on Stage where TCE do testing</li></ul><ul id="7bb6fed1-a0e5-4e36-8360-f0701441368c" class="bulleted-list"><li style="list-style-type:disc">1 on Stage where de test design packs</li></ul><ul id="5ac0f144-09dd-456b-bcc1-1dfa177c5814" class="bulleted-list"><li style="list-style-type:disc">Finally onto Production</li></ul><h2 id="ae85b5c7-e9ba-4e62-8c68-663643433691" class="">Design pack</h2><h3 id="4061034d-71d7-49fd-99e2-04ab995112a7" class="">Structure</h3><p id="5aa70b19-d10b-4153-bcf4-ce4d9a8a99aa" class=""><strong>Config.xml </strong><div class="indented"><p id="c564d0d8-766e-4dad-9f0a-f5c7a2d58e9e" class="">Configuration properties of the DP in Java properties XML format.</p><ul id="096eb598-376c-46d4-b69e-749e848378cc" class="bulleted-list"><li style="list-style-type:disc">design pack parent / parent git url / parent tag</li></ul><ul id="75f5d84f-e3e8-4b3b-9c32-ea86efd9449a" class="bulleted-list"><li style="list-style-type:disc">editor config</li></ul><ul id="80495f07-e6f5-40d3-9fb8-4d8b5eaec370" class="bulleted-list"><li style="list-style-type:disc">define layouts</li></ul><ul id="05858a6d-2b0b-42be-8f97-89a0819875c6" class="bulleted-list"><li style="list-style-type:disc">Create Class names that can be applied later when authoring.</li></ul></div></p><p id="366f1bae-2c1f-4ed8-97c0-53ce9fc64c07" class=""><strong>head.html </strong><div class="indented"><p id="f8ce705d-fcf9-4171-a665-c7c597d677b6" class="">These are not attached to the head as you might expect but bundled</p><ul id="62d7c7e5-b616-4965-b531-043ffaf32270" class="bulleted-list"><li style="list-style-type:disc">CSS</li></ul><ul id="cade6587-b863-447e-ac94-d1e8da892ced" class="bulleted-list"><li style="list-style-type:disc">JS</li></ul></div></p><p id="05d8f1bb-271c-40b1-95bc-b380b3e8dff9" class=""><strong>images</strong><div class="indented"><ul id="f1c4cb9a-c712-4eeb-a363-2aac664b7a4f" class="bulleted-list"><li style="list-style-type:disc">images</li></ul><ul id="258c7a22-93fd-44d3-ae46-212b00c78465" class="bulleted-list"><li style="list-style-type:disc">icons.svg (most icons are stored here in a svg sprite sheet)</li></ul></div></p><p id="2b344c2f-e1b2-40d3-b6c0-43e7c34b82ed" class=""><strong>js</strong><div class="indented"><ul id="92c45b50-37b2-44b7-9c15-dacbdc761246" class="bulleted-list"><li style="list-style-type:disc">All javascript files, mainly for activities that run on top of the Author 5 engine</li></ul><ul id="13112844-2ace-4364-b254-931841c38e48" class="bulleted-list"><li style="list-style-type:disc">config.js additional preferences can be set here.</li></ul><ul id="62929bdc-43af-4d0e-ad6a-756831453a2f" class="bulleted-list"><li style="list-style-type:disc">fonts.js</li></ul></div></p><p id="6ee86843-488a-4f83-a601-366868baeb2e" class=""><strong>less</strong><div class="indented"><p id="75308b23-f847-482c-9bf2-3b15b42d4907" class="">Split up into multiple LESS files</p></div></p><p id="20a80779-5563-4f28-95f2-7de79a876561" class=""><strong>locales</strong><div class="indented"><ul id="2951bbd3-2228-4bd3-a309-95296ed35c2a" class="bulleted-list"><li style="list-style-type:disc">JSON files for different languages</li></ul></div></p><p id="01985a27-f96a-4e01-9299-d08b6817163d" class=""><strong>resources</strong><div class="indented"><ul id="d0eccb32-4868-4f59-91af-88c73a24ba73" class="bulleted-list"><li style="list-style-type:disc">Storage for source items like PSD files (not good having it here)</li></ul></div></p><p id="1ccf7dd4-bbd3-4774-8824-0035bab9efd4" class=""><strong>skinTemplates</strong><div class="indented"><ul id="380182b7-5179-4361-b1f3-2c4e7b214e63" class="bulleted-list"><li style="list-style-type:disc">handlebar files for different sections not everything is available but it must be getting close</li></ul></div></p><p id="8703ed64-c4a8-4274-849b-5b19b4300b7b" class=""><strong>static-files.txt</strong></p><p id="f84f78d6-0179-4123-9d39-a312cdfcc532" class=""><strong><em>templates</em></strong><div class="indented"><ul id="ed1dc08e-8805-40cb-b889-5c178b41ef17" class="bulleted-list"><li style="list-style-type:disc">layout templates</li></ul><ul id="919db4dd-1176-4d0b-a15c-db1483b3834b" class="bulleted-list"><li style="list-style-type:disc">These will slot into #content_wrap in body.html</li></ul><ul id="6fc6627b-7d86-4f41-92b2-3647d9a36d6a" class="bulleted-list"><li style="list-style-type:disc">Contains slots for<ul id="7b21ae1a-5dbd-4f07-9c03-4ae38c9740e1" class="bulleted-list"><li style="list-style-type:circle">.interaction-title</li></ul><ul id="1b29130c-a281-493b-800d-30d8668d1640" class="bulleted-list"><li style="list-style-type:circle">#rubric</li></ul><ul id="55d8bd0c-af72-4884-9b21-45de1e06e23e" class="bulleted-list"><li style="list-style-type:circle">#content</li></ul><ul id="f9a59dfb-f290-409c-8a29-32569a8177ec" class="bulleted-list"><li style="list-style-type:circle">#media</li></ul></li></ul></div></p><p id="7a4b8958-4745-4daf-bfa2-67f94a859a38" class=""><strong>body.html</strong><div class="indented"><p id="5c2fb88e-2ae3-4e08-a6ba-115760f0745f" class="">template for whole page</p><p id="31ffdea5-f674-490c-9383-ffd884d677a1" class="">layout templates are slotted into #content_wrap</p></div></p><h2 id="433aa62b-9f2b-4363-93dc-bb6e9946e6c5" class="">How it works</h2><ol type="1" id="e08101d8-1187-41d7-9860-de951dfe8d5f" class="numbered-list" start="1"><li>We create a branch in our repository.</li></ol><ol type="1" id="d4b78234-5da5-49af-aaa1-042ca3cbd7f4" class="numbered-list" start="2"><li>Set its parent</li></ol><ol type="1" id="df01cba1-1610-404c-9afe-9189db4296d3" class="numbered-list" start="3"><li>Go to Avallain and create a design pack and link the repository</li></ol><ol type="1" id="9049afa9-3f84-4320-8037-e044b9acb887" class="numbered-list" start="4"><li>Make changes to it</li></ol><ol type="1" id="cbd5b7ca-8253-4de6-8700-99f95362d7c0" class="numbered-list" start="5"><li>Commit to GIT</li></ol><ol type="1" id="9edb9ef0-4e75-454e-a561-8a822b9c4838" class="numbered-list" start="6"><li>Apply a tag to them</li></ol><ol type="1" id="d6cf187e-ed46-4bdf-8981-b5b4ecf7f85f" class="numbered-list" start="7"><li>Push to Repro</li></ol><ol type="1" id="f1947122-f16d-4840-8c1c-0eb7ddc0c918" class="numbered-list" start="8"><li>Go to Avallain PreProd as an Admin and update tag and compile.</li></ol><ol type="1" id="ec09303e-3b90-48de-aa00-fe89b49a34c3" class="numbered-list" start="9"><li>Check</li></ol><ol type="1" id="0e51827d-a7ef-4629-be72-e81a25d1a0cd" class="numbered-list" start="10"><li>Go to Avallain Prod as an Admin and update tag and compile.</li></ol><p id="a9571d29-6b50-4def-9723-5903fef6a0c0" class="">
+</p><p id="67c17fcd-8e61-405d-8a62-0ec929b02125" class="">Compilation happens on the server in the admin section or can happen locally if you set up their local development environment.</p><p id="eee93a46-27b9-41de-9aa4-b9db788ddc26" class="">On compilation it pulls in the parent design pack or parents as you can have grand parents great grand parents etc and merges them all together.</p><p id="1963bb90-ef27-46c0-ba52-591f58212fc2" class="">Most features overwrite parent ones eg icons.svg in our design pack over-rides the one in the base design pack.</p><p id="0c3cebb0-139c-4e95-bae0-d67588c2d916" class="">All the less files from all the design packs are compiled together with child ones being added in later. This allows for variables to ripple back up from the child and for files to be turned off.</p><p id="a6aa38a5-b81f-4325-b206-3f9874b32610" class="">
+</p><h3 id="ecfad332-3db9-495c-ae31-533fef385626" class="">Cons</h3><ul id="f63c63c4-4c79-429e-807e-160e2b845e01" class="bulleted-list"><li style="list-style-type:disc">LESS rather than SCSS</li></ul><ul id="d9759daf-8e60-427f-8ac2-e83005830313" class="bulleted-list"><li style="list-style-type:disc">No maps unless doing local compilation so tracking down errors is difficult.</li></ul><ul id="05f52e62-d160-4a75-9416-12dca2d9e0e0" class="bulleted-list"><li style="list-style-type:disc">Relies too heavily on mixins which create unessasary styles and make tracking down the source of code difficult. </li></ul><ul id="c66b95cb-09c5-40e5-81ab-2137c30827b0" class="bulleted-list"><li style="list-style-type:disc">SVG sprite sheet is not ideal. Better if we could insert the SVGs into the DOM so they can be manipulated with CSS. Hub has a nice system for inserting SVGs with “use”. </li></ul><ul id="04478111-5b56-4a96-9a58-f9a24d9cc689" class="bulleted-list"><li style="list-style-type:disc">Class names are inconsistent and require quite lengthy selectors</li></ul><ul id="dbeab358-9e8a-4cb6-a52f-476ea74cd6d5" class="bulleted-list"><li style="list-style-type:disc">Avallain Base still has a lot of CSS in it<ul id="034cc6d1-e60a-4bd4-85c8-b13e4705ae66" class="bulleted-list"><li style="list-style-type:circle">I have seen a new version in which they abandoned creating lots of variables and made a striped back base design pack using BEM naming and only the minimum required LESS</li></ul></li></ul><p id="5296bb82-3b4e-43da-8d09-91a205315afe" class="">
+</p><p id="15000b6a-180b-49c9-98c9-1e8628e554b1" class="">
+</p><hr id="caecd70a-829d-4526-9fc6-58ce68545327"/><h1 id="2df4896a-2528-4b83-bbca-f4875b2a7797" class="">Author Projects</h1><h2 id="0972d4ec-537e-4685-bb35-f1aaada833a9" class="">Product Type</h2><ul id="b5a60206-fc63-4e01-9315-1fb3abd9e997" class="bulleted-list"><li style="list-style-type:disc">Global Options</li></ul><ul id="edee49d1-413f-4a04-ad44-ab213c0def59" class="bulleted-list"><li style="list-style-type:disc">Activity Types</li></ul><ul id="6aee8455-e476-4746-914e-9e6b790327ff" class="bulleted-list"><li style="list-style-type:disc">Metadata Schemes</li></ul><ul id="f228fef6-e2e5-4d58-86e9-85d1ba067bc0" class="bulleted-list"><li style="list-style-type:disc">Design Packages</li></ul><h2 id="60a13d6a-4c45-4a89-aecb-4b9c0da673b3" class="">Project</h2><h3 id="0708ba7e-9302-4a0e-a851-03741de33658" class="">Project Settings</h3><p id="616b502e-9bb4-4f4f-aeb2-14147a645a58" class=""><strong>Project Settings: </strong>Name / Project level settings</p><p id="a73b8c44-03d3-4dae-b99e-3af5386a7fbf" class=""><strong>Project Team:</strong> provide access and assign roles</p><p id="681db172-177f-4a81-8ba0-58c8e67ad200" class=""><strong>Meta data: </strong>Apply Meta data schemas</p><p id="622b3fef-6858-4fd1-9c65-2e590dc461f4" class=""><strong>Design Packages:</strong> Add design packs and layouts</p><p id="d27ec946-44cf-414b-9e2b-243e8ae394b3" class=""><strong>Activity types: </strong>Add or remove activity types<div class="indented"><p id="169bd75f-7c89-4548-afe0-7b985e62ecba" class=""><strong>Activity Class: </strong><br/>Activity Type Options<br/>Layouts are specified in design packs but are assigned to activities at either Product or Product Type level. Unless this happens you wont see the option in the Layout menu or you will see one from another design pack. <br/><div class="indented"><p id="216dc30f-7f8b-4249-b61a-625975ce4386" class=""><strong>Master Activity Types</strong><div class="indented"><p id="90dfe2aa-befa-4c9c-bc00-019b12fa0cb4" class=""><strong>Project Activity Types</strong></p></div></p></div></p></div></p><p id="ae5269ed-0acf-4b6c-b4de-bdfe5a39b8c7" class=""><strong>Global options:</strong> Provide LO level option defaults </p><p id="b58cd915-2191-4099-ab72-b9230f847c93" class=""><strong>Publishing:</strong> Set which output options are available</p><h3 id="c9300cf1-d026-4794-a1a5-6c58f5dbb11e" class="">Project Activity Types</h3><p id="2e970e73-9449-4909-80fe-b533fd534858" class="">Every activity type has its own set of options you can configure</p><h3 id="3aadf2fc-fb51-450f-9675-c9c53023ea7b" class="">Reports</h3><p id="20db7b64-2acf-4f4d-ab38-6a690939c78c" class="">Different reports you can run on a project</p><p id="99ab0b3a-7762-4ebd-82de-1bedf051d90a" class="">
+</p><p id="44e66438-4aaf-4f01-a524-4672f34e7bcc" class="">
+</p><p id="bcb0ec42-b317-44bc-86cf-b54df9130663" class="">
+</p><p id="abafded7-5c3d-4a99-ac87-390f5264f4a1" class="">
+</p><p id="34d0de6c-6e3e-433f-bedc-030f92bedefa" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
