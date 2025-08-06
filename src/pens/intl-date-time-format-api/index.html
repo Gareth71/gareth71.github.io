@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Locale Date Formatter</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      select {
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+      #dateDisplay {
+        font-size: 24px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Locale Date Formatter</h1>
+    <label for="localeSelect">Choose a locale:</label>
+    <select id="localeSelect">
+      <option value="en-GB">United Kingdom</option>
+      <option value="ja-JP">Japan</option>
+      <option value="ko-KR">Korea</option>
+      <option value="tr-TR">Turkey</option>
+      <option value="es-ES">Spain</option>
+    </select>
+
+    <div id="dateDisplay"></div>
+
+    <script>
+      const localeSelect = document.getElementById("localeSelect");
+      const dateDisplay = document.getElementById("dateDisplay");
+
+      function updateDate() {
+        const selectedLocale = localeSelect.value;
+        const now = new Date();
+        const formatter = new Intl.DateTimeFormat(selectedLocale, {
+          dateStyle: "medium",
+          timeStyle: "short",
+          hour12: true,
+
+          //   hour: '2-digit',
+          //   minute: '2-digit',
+          //   second: '2-digit',
+        });
+        dateDisplay.textContent = formatter.format(now);
+      }
+
+      localeSelect.addEventListener("change", updateDate);
+      updateDate(); // Initial display
+    </script>
+  </body>
+</html>
