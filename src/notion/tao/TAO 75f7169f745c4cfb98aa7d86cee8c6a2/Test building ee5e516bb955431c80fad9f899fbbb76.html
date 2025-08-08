@@ -1,0 +1,761 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Test building</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="ee5e516b-b955-431c-80fa-d9f899fbbb76" class="page sans"><header><h1 class="page-title">Test building</h1><p class="page-description"></p></header><div class="page-body"><p id="8194c6b5-078f-448c-97b9-77469fb73fba" class="">Create a new test</p><h1 id="a5c9ad57-c394-4e39-a959-bce8e772c948" class="">Adjust the properties</h1><p id="319c60ec-d7a3-4f52-abd7-5bbd54d80d3b" class="">(Identifier should not be changed to match screen shot)</p><h2 id="e4b06619-116a-49b5-9862-b98d5780aca2" class="">Test properties</h2><figure id="4e3bca16-a13d-4af1-b003-d67d89ca0caa" class="image"><a href="Test%20building%20ee5e516bb955431c80fad9f899fbbb76/Untitled.png"><img style="width:2694px" src="Test%20building%20ee5e516bb955431c80fad9f899fbbb76/Untitled.png"/></a></figure><h2 id="0a2fb0a8-146b-4b6a-a241-bb750c2bb8c7" class="">Part settings</h2><p id="a5bdad6a-3ea3-44bd-8e4c-e29105fb7f3d" class="">Set the name in the grey band to the same as the  Tests Title as it appears in the side nav</p><figure id="3ae4b77b-7715-40cd-ace8-9f4027edeffd" class="image"><a href="Test%20building%20ee5e516bb955431c80fad9f899fbbb76/Untitled%201.png"><img style="width:2692px" src="Test%20building%20ee5e516bb955431c80fad9f899fbbb76/Untitled%201.png"/></a></figure><h2 id="b744f4f5-4666-4d7d-ae4f-ff22a5b6367c" class="">Sections</h2><p id="c4313297-7742-4492-a2d1-9b311b7d41b2" class="">Add 4 sections, Instruzioni, Reading, Listening, Results</p><h3 id="cc5e8da7-1eaf-4698-a76e-da992a5df03b" class="">Instruzioni</h3><p id="7f7e7456-5a17-4889-9b49-5dd323360d37" class="">Add the instruction item (there are different versions for the different levels and they where updated so there might also be old versions out there)</p><figure id="47661e5f-963f-4f9b-bca4-e92452e171d5" class="image"><a href="Test%20building%20ee5e516bb955431c80fad9f899fbbb76/Untitled%202.png"><img style="width:2106px" src="Test%20building%20ee5e516bb955431c80fad9f899fbbb76/Untitled%202.png"/></a></figure><h3 id="bcb64974-ec77-475d-8037-1c6ea6d8f7a4" class="">Reading</h3><p id="cf83faa1-7a91-438c-ba84-a06bde504ccb" class="">Add the Reading items</p><p id="78e4802f-f9e6-4e87-990a-b5ae021e7465" class="">Later we need to add <strong>Reading</strong> and <strong>Listening</strong> to the Categories field maybe we can do it before export?</p><figure id="f811ad2d-ed7e-450e-90ac-bfd17c6fd3cd" class="image"><a href="Test%20building%20ee5e516bb955431c80fad9f899fbbb76/Untitled%203.png"><img style="width:2114px" src="Test%20building%20ee5e516bb955431c80fad9f899fbbb76/Untitled%203.png"/></a></figure><h3 id="b0c5458b-2d7a-44b7-846d-9fd020f02779" class="">Listening</h3><p id="e8100642-fd0f-4163-8fbf-cbe450e0d720" class="">Add the listening items</p><figure id="378d125c-5ee5-42c6-9846-2942ca5ad7d7" class="image"><a href="Test%20building%20ee5e516bb955431c80fad9f899fbbb76/Untitled%204.png"><img style="width:2110px" src="Test%20building%20ee5e516bb955431c80fad9f899fbbb76/Untitled%204.png"/></a></figure><h3 id="6879f2cc-39f6-4a14-b074-aefc63a0547b" class="">Results</h3><p id="53e56218-f3a4-4f7d-8198-96cdb7ca8763" class="">Add the _Results page item</p><figure id="3f96165d-94b2-4de8-a57f-53e63bd1044a" class="image"><a href="Test%20building%20ee5e516bb955431c80fad9f899fbbb76/Untitled%205.png"><img style="width:2106px" src="Test%20building%20ee5e516bb955431c80fad9f899fbbb76/Untitled%205.png"/></a></figure><h1 id="a9394e81-787c-4dcf-a8e0-a6a0c28c9565" class="">Export</h1><ul id="04942ced-84dc-442e-8f52-8cb8d091e97a" class="bulleted-list"><li style="list-style-type:disc">export the test using QTI Test Package 2.1</li></ul><div id="d1de0aa4-9e10-482f-918c-2f6bbdc1f90a" class="column-list"><div id="ff588c4b-02ac-483a-bb39-ec2455a71a17" style="width:50%" class="column"><figure id="f46681eb-f7e8-4838-908a-bb213090e784" class="image"><a href="Test%20building%20ee5e516bb955431c80fad9f899fbbb76/Untitled%206.png"><img style="width:288px" src="Test%20building%20ee5e516bb955431c80fad9f899fbbb76/Untitled%206.png"/></a></figure></div><div id="9ff37e02-e6a1-4025-90b0-6577a54787cc" style="width:50%" class="column"><p id="9d487863-aa7d-48ad-9a70-b9ab79d77745" class="">
+</p></div></div><h1 id="f07cc420-b38a-4c2a-8d79-722c30a75b98" class="">Edit</h1><ol type="1" id="26f2471f-5665-40fb-9a21-160f1dfb5833" class="numbered-list" start="1"><li>Unzip the export</li></ol><h2 id="dd0a9601-838d-4a36-b859-715dd208871b" class="">test.xml</h2><ol type="1" id="670d438c-9103-4423-a913-fb03aed7df64" class="numbered-list" start="1"><li>modify <strong>identifier</strong> and <strong>title</strong> so that you can identify the test when you import it back into TAO, I add &quot; _v1&quot; to the end of both and an underscore at the start of the title.<p id="81e6eb7b-5e26-4e8e-b1e6-cad54d3f6e24" class="">The Title seems to be the part that used the most in TAO for the imported items and the test name</p></li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="cec27b44-3d75-4918-9696-78bb1c2a5347" class="code code-wrap"><code class="language-XML" style="white-space:pre-wrap;word-break:break-all">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;assessmentTest xmlns=&quot;http://www.imsglobal.org/xsd/imsqti_v2p1&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+identifier=&quot;_Primo_2_v1&quot;
+title=&quot;_Primo 2 v1&quot;
+toolName=&quot;tao&quot;
+toolVersion=&quot;3.2.0-RC2&quot;
+xsi:schemaLocation=&quot;http://www.imsglobal.org/xsd/imsqti_v2p1 http://www.imsglobal.org/xsd/qti/qtiv2p1/imsqti_v2p1.xsd&quot;&gt;</code></pre><ol type="1" id="a5e6e116-8b2b-48ca-a19a-ea9ce51eeaa2" class="numbered-list" start="2"><li> Replace the top three outcomeDeclaration with the following to the top</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="130c8d6c-7655-436d-80aa-62505a4bf65b" class="code code-wrap"><code class="language-XML" style="white-space:pre-wrap;word-break:break-all">&lt;outcomeDeclaration identifier=&quot;SCORE_TOTAL&quot; cardinality=&quot;single&quot; baseType=&quot;float&quot;/&gt;
+  &lt;outcomeDeclaration identifier=&quot;SCORE_CATEGORY_READING&quot; cardinality=&quot;single&quot; baseType=&quot;float&quot;/&gt;
+  &lt;outcomeDeclaration identifier=&quot;SCORE_CATEGORY_LISTENING&quot; cardinality=&quot;single&quot; baseType=&quot;float&quot;/&gt;
+&lt;outcomeDeclaration identifier=&quot;SCORE_TOTAL_MAX&quot; cardinality=&quot;single&quot; baseType=&quot;float&quot;/&gt;
+  &lt;outcomeDeclaration identifier=&quot;SCORE_CATEGORY_MAX_READING&quot; cardinality=&quot;single&quot; baseType=&quot;float&quot;/&gt;
+  &lt;outcomeDeclaration identifier=&quot;SCORE_CATEGORY_MAX_LISTENING&quot; cardinality=&quot;single&quot; baseType=&quot;float&quot;/&gt;
+&lt;outcomeDeclaration identifier=&quot;SCORE_RATIO&quot; cardinality=&quot;single&quot; baseType=&quot;float&quot;/&gt;</code></pre><ol type="1" id="4446cafd-16fa-4fab-b8fd-fc3afb60785a" class="numbered-list" start="3"><li>Not required if the test already has had the results page added <br/>insert the following after <strong>&lt;timeLimits </strong><em><strong>allowLateSubmission</strong></em><strong>=&quot;false&quot;/&gt;</strong> in the last assessmentSection and adjust the red scores and test title</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="f49b034d-4ca9-4dc9-bcab-9876c53e4ea4" class="code code-wrap"><code class="language-XML" style="white-space:pre-wrap;word-break:break-all">&lt;rubricBlock view=&quot;candidate&quot;&gt;
+        You have just finished
+        &lt;h1&gt;Secundo Grado: Ready for Invalsi 5a Online Test 1&lt;/h1&gt;
+        &lt;h2&gt;You scored: &lt;printedVariable identifier=&quot;SCORE_TOTAL&quot; base=&quot;10&quot; powerForm=&quot;false&quot; delimiter=&quot;;&quot; mappingIndicator=&quot;=&quot; format=&quot;%d&quot;/&gt;/88&lt;/h2&gt;
+        &lt;ul class=&quot;results-list&quot;&gt;
+          &lt;li&gt;
+            Reading:
+            &lt;printedVariable identifier=&quot;SCORE_CATEGORY_READING&quot; base=&quot;10&quot; powerForm=&quot;false&quot; delimiter=&quot;;&quot; mappingIndicator=&quot;=&quot; format=&quot;%d&quot;/&gt;/42
+          &lt;/li&gt;
+          &lt;li&gt;
+            Listening:
+            &lt;printedVariable identifier=&quot;SCORE_CATEGORY_LISTENING&quot; base=&quot;10&quot; powerForm=&quot;false&quot; delimiter=&quot;;&quot; mappingIndicator=&quot;=&quot; format=&quot;%d&quot;/&gt;/46
+          &lt;/li&gt;
+        &lt;/ul&gt;
+&lt;/rubricBlock&gt;</code></pre><ol type="1" id="680351a7-0c10-42c3-8389-8f10c3945365" class="numbered-list" start="4"><li>Replace  outcomeProcessing at the very end with this.</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="da0044b1-203d-4119-bcd0-a798a363b1fd" class="code code-wrap"><code class="language-XML" style="white-space:pre-wrap;word-break:break-all">&lt;outcomeProcessing&gt;
+    &lt;setOutcomeValue identifier=&quot;SCORE_TOTAL&quot;&gt;
+      &lt;sum&gt;
+        &lt;testVariables variableIdentifier=&quot;SCORE&quot;/&gt;
+      &lt;/sum&gt;
+    &lt;/setOutcomeValue&gt;
+    &lt;setOutcomeValue identifier=&quot;SCORE_CATEGORY_READING&quot;&gt;
+      &lt;sum&gt;
+        &lt;testVariables includeCategory=&quot;Reading&quot; variableIdentifier=&quot;SCORE&quot;/&gt;
+      &lt;/sum&gt;
+    &lt;/setOutcomeValue&gt;
+    &lt;setOutcomeValue identifier=&quot;SCORE_CATEGORY_LISTENING&quot;&gt;
+      &lt;sum&gt;
+        &lt;testVariables includeCategory=&quot;Listening&quot; variableIdentifier=&quot;SCORE&quot;/&gt;
+      &lt;/sum&gt;
+    &lt;/setOutcomeValue&gt;
+    &lt;setOutcomeValue identifier=&quot;SCORE_TOTAL_MAX&quot;&gt;
+      &lt;sum&gt;
+        &lt;testVariables variableIdentifier=&quot;MAXSCORE&quot;/&gt;
+      &lt;/sum&gt;
+    &lt;/setOutcomeValue&gt;
+    &lt;setOutcomeValue identifier=&quot;SCORE_CATEGORY_MAX_READING&quot;&gt;
+      &lt;sum&gt;
+        &lt;testVariables includeCategory=&quot;Reading&quot; variableIdentifier=&quot;MAXSCORE&quot;/&gt;
+      &lt;/sum&gt;
+    &lt;/setOutcomeValue&gt;
+    &lt;setOutcomeValue identifier=&quot;SCORE_CATEGORY_MAX_LISTENING&quot;&gt;
+      &lt;sum&gt;
+        &lt;testVariables includeCategory=&quot;Listening&quot; variableIdentifier=&quot;MAXSCORE&quot;/&gt;
+      &lt;/sum&gt;
+    &lt;/setOutcomeValue&gt;
+    &lt;outcomeCondition&gt;
+      &lt;outcomeIf&gt;
+        &lt;isNull&gt;
+          &lt;variable identifier=&quot;SCORE_TOTAL_MAX&quot;/&gt;
+        &lt;/isNull&gt;
+        &lt;setOutcomeValue identifier=&quot;SCORE_RATIO&quot;&gt;
+          &lt;baseValue baseType=&quot;float&quot;&gt;0&lt;/baseValue&gt;
+        &lt;/setOutcomeValue&gt;
+      &lt;/outcomeIf&gt;
+      &lt;outcomeElse&gt;
+        &lt;setOutcomeValue identifier=&quot;SCORE_RATIO&quot;&gt;
+          &lt;divide&gt;
+            &lt;variable identifier=&quot;SCORE_TOTAL&quot;/&gt;
+            &lt;variable identifier=&quot;SCORE_TOTAL_MAX&quot;/&gt;
+          &lt;/divide&gt;
+        &lt;/setOutcomeValue&gt;
+      &lt;/outcomeElse&gt;
+    &lt;/outcomeCondition&gt;
+  &lt;/outcomeProcessing&gt;</code></pre><p id="4823680e-c078-4877-8d06-bf2059bfdeed" class="">Results</p><h1 id="8760dd1a-7644-44ae-bcef-8ddf3eb19cd3" class="">Re-import</h1><p id="2850981b-623c-4b0d-ae3e-cf19888c0182" class="">Select the xml file and the two folders and choose<em> Compress 3 items</em> from the contextual menu.</p><p id="ceb905fc-e001-47e5-bc9c-6c146dbeedd3" class="">The resulting Archive is what you import to TAO.</p><p id="e580daf0-5b70-451f-9e00-8da9052c277b" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="fd5eff54-c61a-4da9-b51c-e706dd5e0c03"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">When you upload wait for the archive.zip to be uploaded before you click Import (a green bar will fill up along the bottom of the screen once this has happened) </div></figure><p id="3d1638a1-b727-43f2-8ea2-92a3d76610b9" class="">
+</p><p id="1dcb4d6e-ae76-4792-b9b6-773f1a68d9e1" class="">Correct the test name to its full version.</p><p id="425621b8-6950-48d2-b9c2-b2df922b91b1" class="">Once it has been imported you can assign a category to each section. All items inside it will be given the category.</p><div id="5b79788f-d2ab-4755-b77a-9384ed52d936" class="column-list"><div id="760a814c-393c-4439-9223-a5b207acafe3" style="width:62.5%" class="column"><figure id="d1592366-6e6b-4399-9a11-9557aabb82a7" class="image"><a href="Test%20building%20ee5e516bb955431c80fad9f899fbbb76/Untitled%207.png"><img style="width:384px" src="Test%20building%20ee5e516bb955431c80fad9f899fbbb76/Untitled%207.png"/></a></figure></div><div id="cbc11414-f4a3-4dd1-aa0f-734ba82a3378" style="width:37.5%" class="column"><p id="f3fc5009-d57d-4c7e-8490-d1f8c8159387" class="">
+</p></div></div><p id="7f1fda16-73d3-4e97-8c15-22bcc24e9c83" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
