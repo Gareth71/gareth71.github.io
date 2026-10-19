@@ -1,0 +1,38 @@
+.combo {
+  position: relative;
+  width: 250px;
+}
+
+.combo input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+}
+
+.combo-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid #ccc;
+  background: white;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+}
+
+.combo-list li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.combo-list li:hover {
+  background: #f0f0f0;
+}
+
+.combo-list.show {
+  display: block;
+}

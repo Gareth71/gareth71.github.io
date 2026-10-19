@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Accessible Combobox</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: system-ui, sans-serif;
+        padding: 2rem;
+        color: #222;
+      }
+
+      .form-group {
+        max-width: 22rem;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+
+      .combobox {
+        position: relative;
+      }
+
+      .input-wrapper {
+        position: relative;
+      }
+
+      .combobox-input {
+        width: 100%;
+        padding: 0.75rem 2.75rem 0.75rem 0.75rem;
+        border: 1px solid #767676;
+        border-radius: 0.25rem;
+        font: inherit;
+        background: #fff;
+      }
+
+      .combobox-input[aria-invalid="true"] {
+        border-color: #b00020;
+      }
+
+      .combobox-input:focus,
+      .toggle:focus {
+        outline: 3px solid #005fcc;
+        outline-offset: 2px;
+      }
+
+      .toggle {
+        position: absolute;
+        top: 1px;
+        right: 1px;
+        bottom: 1px;
+
+        width: 2.5rem;
+
+        border: 0;
+        border-left: 1px solid #ccc;
+        border-radius: 0 0.25rem 0.25rem 0;
+
+        background: #fff;
+        color: #222;
+
+        cursor: pointer;
+        font: inherit;
+      }
+
+      .toggle:hover {
+        background: #f2f2f2;
+      }
+
+      .listbox {
+        position: absolute;
+        top: calc(100% + 0.25rem);
+        left: 0;
+        right: 0;
+
+        max-height: 14rem;
+        overflow-y: auto;
+
+        margin: 0;
+        padding: 0;
+
+        list-style: none;
+
+        border: 1px solid #767676;
+        border-radius: 0.25rem;
+
+        background: #fff;
+
+        z-index: 1000;
+      }
+
+      .option {
+        padding: 0.75rem;
+        cursor: default;
+      }
+
+      .option:hover,
+      .option.active {
+        background: #005fcc;
+        color: #fff;
+      }
+
+      .help {
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+        color: #555;
+      }
+
+      .error {
+        margin-top: 0.5rem;
+        color: #b00020;
+        font-weight: 600;
+      }
+
+      .submit {
+        margin-top: 1rem;
+        padding: 0.75rem 1rem;
+        font: inherit;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+        border: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form id="languageForm" novalidate>
+      <div class="form-group">
+        <label for="languageInput"> Language </label>
+
+        <div class="combobox" id="languageCombo">
+          <div class="input-wrapper">
+            <input
+              id="languageInput"
+              class="combobox-input"
+              type="text"
+              role="combobox"
+              aria-autocomplete="list"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              aria-controls="languageList"
+              aria-required="true"
+              aria-invalid="false"
+              aria-describedby="languageHelp"
+              autocomplete="off"
+            />
+
+            <button
+              id="languageToggle"
+              class="toggle"
+              type="button"
+              aria-label="Show language options"
+              aria-expanded="false"
+              aria-controls="languageList"
+              tabindex="-1"
+            >
+              ▼
+            </button>
+          </div>
+
+          <!--
+        This contains the stable value submitted with the form.
+
+        Example:
+          Visible: Apple
+          Submitted: apple
+      -->
+
+          <input type="hidden" id="languageValue" name="language" />
+
+          <ul
+            id="languageList"
+            class="listbox"
+            role="listbox"
+            aria-label="Language options"
+            hidden
+          ></ul>
+        </div>
+
+        <div id="languageHelp" class="help">
+          Start typing to filter the options, or use the arrow button to show
+          all options.
+        </div>
+
+        <div id="languageError" class="error" role="alert" hidden>
+          Please select a language from the list.
+        </div>
+
+        <div
+          id="languageStatus"
+          class="sr-only"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        ></div>
+
+        <button class="submit" type="submit">Apply</button>
+      </div>
+    </form>
+
+    <script>
+      const options = [
+        { value: "en", label: "English" },
+        { value: "it", label: "Italiano (Italian)" },
+        { value: "es", label: "Español (Spanish)" },
+        { value: "pt-BR", label: "Português (Brasil)" },
+        { value: "tr", label: "Türkçe (Turkish)" },
+        { value: "vi", label: "Tiếng Việt (Vietnamese)" },
+        { value: "th", label: "ไทย (Thai)" },
+      ];
+
+      const form = document.getElementById("languageForm");
+
+      const combobox = document.getElementById("languageCombo");
+
+      const displayInput = document.getElementById("languageInput");
+
+      const hiddenInput = document.getElementById("languageValue");
+
+      const toggleButton = document.getElementById("languageToggle");
+
+      const listbox = document.getElementById("languageList");
+
+      const errorMessage = document.getElementById("languageError");
+
+      const liveRegion = document.getElementById("languageStatus");
+
+      let filteredOptions = [];
+      let activeIndex = -1;
+
+      /*
+       * Open / close
+       */
+
+      function isOpen() {
+        return !listbox.hidden;
+      }
+
+      function openList() {
+        if (!filteredOptions.length) {
+          return;
+        }
+
+        listbox.hidden = false;
+
+        displayInput.setAttribute("aria-expanded", "true");
+
+        toggleButton.setAttribute("aria-expanded", "true");
+      }
+
+      function closeList() {
+        listbox.hidden = true;
+
+        displayInput.setAttribute("aria-expanded", "false");
+
+        toggleButton.setAttribute("aria-expanded", "false");
+
+        displayInput.removeAttribute("aria-activedescendant");
+
+        activeIndex = -1;
+      }
+
+      /*
+       * Validation
+       */
+
+      function clearValidation() {
+        displayInput.setAttribute("aria-invalid", "false");
+
+        displayInput.setAttribute("aria-describedby", "languageHelp");
+
+        errorMessage.hidden = true;
+      }
+
+      function showValidationError() {
+        displayInput.setAttribute("aria-invalid", "true");
+
+        displayInput.setAttribute(
+          "aria-describedby",
+          "languageHelp languageError",
+        );
+
+        errorMessage.hidden = false;
+      }
+
+      function validate() {
+        /*
+         * A valid value must correspond to an actual option.
+         *
+         * The visible text alone is NOT enough.
+         */
+
+        const selectedOption = options.find(
+          (option) => option.value === hiddenInput.value,
+        );
+
+        const valid =
+          Boolean(selectedOption) &&
+          displayInput.value === selectedOption.label;
+
+        if (valid) {
+          clearValidation();
+        } else {
+          hiddenInput.value = "";
+
+          showValidationError();
+        }
+
+        return valid;
+      }
+
+      /*
+       * Result announcements
+       */
+
+      function announceResults() {
+        const count = filteredOptions.length;
+
+        if (count === 0) {
+          liveRegion.textContent = "No matching options.";
+
+          return;
+        }
+
+        if (count === 1) {
+          liveRegion.textContent = "1 option available.";
+
+          return;
+        }
+
+        liveRegion.textContent = `${count} options available.`;
+      }
+
+      /*
+       * Active option
+       */
+
+      function updateActiveOption() {
+        const optionElements = listbox.querySelectorAll('[role="option"]');
+
+        optionElements.forEach((element, index) => {
+          const isActive = index === activeIndex;
+
+          element.classList.toggle("active", isActive);
+        });
+
+        if (activeIndex < 0 || activeIndex >= optionElements.length) {
+          displayInput.removeAttribute("aria-activedescendant");
+
+          return;
+        }
+
+        const active = optionElements[activeIndex];
+
+        displayInput.setAttribute("aria-activedescendant", active.id);
+
+        active.scrollIntoView({
+          block: "nearest",
+        });
+      }
+
+      /*
+       * Render options
+       */
+
+      function renderList(filter = "", showAll = false) {
+        const search = filter.trim().toLowerCase();
+
+        filteredOptions = showAll
+          ? [...options]
+          : options.filter((option) =>
+              option.label.toLowerCase().includes(search),
+            );
+
+        listbox.innerHTML = "";
+
+        filteredOptions.forEach((option, index) => {
+          const item = document.createElement("li");
+
+          item.id = `language-option-${index}`;
+
+          item.className = "option";
+
+          item.setAttribute("role", "option");
+
+          item.textContent = option.label;
+
+          /*
+           * Prevent the textbox losing focus before
+           * the click selection is processed.
+           */
+
+          item.addEventListener("pointerdown", (event) => {
+            event.preventDefault();
+          });
+
+          item.addEventListener("click", () => {
+            selectOption(option);
+          });
+
+          listbox.appendChild(item);
+        });
+
+        /*
+         * Automatically highlight the first match.
+         */
+
+        activeIndex = filteredOptions.length ? 0 : -1;
+
+        updateActiveOption();
+        announceResults();
+      }
+
+      /*
+       * Selection
+       */
+
+      function selectOption(option) {
+        displayInput.value = option.label;
+
+        hiddenInput.value = option.value;
+
+        clearValidation();
+
+        closeList();
+
+        displayInput.focus();
+      }
+
+      /*
+       * Typing
+       */
+
+      displayInput.addEventListener("input", () => {
+        /*
+         * Any manual editing invalidates the
+         * previous committed selection.
+         */
+
+        hiddenInput.value = "";
+
+        clearValidation();
+
+        renderList(displayInput.value);
+
+        if (filteredOptions.length) {
+          openList();
+        } else {
+          closeList();
+        }
+      });
+
+      displayInput.addEventListener("focus", () => {
+        renderList(displayInput.value);
+
+        if (filteredOptions.length) {
+          openList();
+        }
+      });
+
+      /*
+       * Keyboard interaction
+       */
+
+      displayInput.addEventListener("keydown", (event) => {
+        switch (event.key) {
+          /*
+           * DOWN ARROW
+           */
+
+          case "ArrowDown":
+            event.preventDefault();
+
+            if (!isOpen()) {
+              renderList(displayInput.value);
+
+              openList();
+
+              return;
+            }
+
+            activeIndex = Math.min(activeIndex + 1, filteredOptions.length - 1);
+
+            updateActiveOption();
+
+            break;
+
+          /*
+           * UP ARROW
+           */
+
+          case "ArrowUp":
+            if (!isOpen()) {
+              return;
+            }
+
+            event.preventDefault();
+
+            activeIndex = Math.max(activeIndex - 1, 0);
+
+            updateActiveOption();
+
+            break;
+
+          /*
+           * ENTER
+           *
+           * If the list is open, select the
+           * highlighted option.
+           *
+           * Otherwise allow normal form submission.
+           */
+
+          case "Enter":
+            if (isOpen() && activeIndex >= 0 && filteredOptions[activeIndex]) {
+              event.preventDefault();
+
+              selectOption(filteredOptions[activeIndex]);
+            }
+
+            break;
+
+          /*
+           * ESCAPE
+           */
+
+          case "Escape":
+            if (isOpen()) {
+              event.preventDefault();
+
+              closeList();
+            }
+
+            break;
+
+          /*
+           * TAB
+           */
+
+          case "Tab":
+            closeList();
+
+            break;
+
+          /*
+           * HOME / END retain normal textbox
+           * editing behaviour.
+           */
+        }
+      });
+
+      /*
+       * Dropdown button
+       */
+
+      toggleButton.addEventListener("click", () => {
+        if (isOpen()) {
+          closeList();
+
+          displayInput.focus();
+
+          return;
+        }
+
+        /*
+         * The arrow button behaves like a
+         * traditional select:
+         *
+         * show ALL available options.
+         */
+
+        renderList("", true);
+
+        openList();
+
+        displayInput.focus();
+      });
+
+      /*
+       * Click outside
+       */
+
+      document.addEventListener("pointerdown", (event) => {
+        if (!combobox.contains(event.target)) {
+          closeList();
+        }
+      });
+
+      /*
+       * Validate when leaving the field.
+       */
+
+      displayInput.addEventListener("blur", (event) => {
+        /*
+         * Don't validate while interaction is
+         * moving to something inside the component.
+         */
+
+        if (event.relatedTarget && combobox.contains(event.relatedTarget)) {
+          return;
+        }
+
+        closeList();
+
+        /*
+         * Don't immediately show a required-field
+         * error on an untouched empty field.
+         *
+         * Submission will still reject it.
+         */
+
+        if (displayInput.value.trim() !== "") {
+          validate();
+        }
+      });
+
+      /*
+       * Form submission
+       */
+
+      form.addEventListener("submit", (event) => {
+        /*
+         * Always validate on submission.
+         *
+         * Empty input and arbitrary text are
+         * therefore both rejected.
+         */
+
+        if (!validate()) {
+          event.preventDefault();
+
+          closeList();
+
+          displayInput.focus();
+
+          return;
+        }
+
+        /*
+         * Demo only:
+         * prevent navigation and display the value.
+         *
+         * Remove these lines when connecting the
+         * form to a real endpoint.
+         */
+
+        event.preventDefault();
+
+        alert(`Submitted value: ${hiddenInput.value}`);
+      });
+    </script>
+  </body>
+</html>

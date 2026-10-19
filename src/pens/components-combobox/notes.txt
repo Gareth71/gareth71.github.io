@@ -1,0 +1,17 @@
+Label association
+Editable combobox pattern
+aria-expanded
+aria-controls
+aria-haspopup
+aria-activedescendant
+role=listbox
+role=option
+Arrow navigation
+Enter selection
+Esc close
+Screen reader announcements
+Required validation
+Stable submitted value
+Focus remains in input
+Outside click handling
+Invalid arbitrary text rejection
