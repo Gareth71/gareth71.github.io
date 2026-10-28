@@ -1,0 +1,26 @@
+/* load a file containing lots of @font-face declarations from Google,  */
+@import "https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap";
+
+/* Use @font-face with a local font and map a bold weight to 400 and scale it down 90% */
+@font-face {
+  font-family: "Noto Serif Display";
+  src: url("./static/NotoSerifDisplay-Bold.ttf") format("truetype");
+  font-weight: 400;
+  size-adjust: 90%;
+}
+
+.serif {
+  font-family: "DM Serif Display", "Noto Serif Display", serif;
+}
+
+.dm-serif {
+  font-family: "DM Serif Display", serif;
+}
+
+.sans {
+  font-family: "Open Sans", sans-serif;
+}
+
+.big {
+  font-size: 3rem;
+}
