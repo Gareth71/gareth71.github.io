@@ -1,0 +1,27 @@
+body {
+  padding: 0;
+  display: flex;
+}
+
+.left,
+.right {
+  margin: 0 auto;
+  width: max-content;
+  padding-top: 2rem;
+}
+label {
+  display: block;
+  margin-top: 2rem;
+}
+
+label + * {
+  margin-top: 0.5rem;
+}
+
+.right {
+  /* Requires Safari 27 */
+  select,
+  select::picker(select) {
+    appearance: base-select;
+  }
+}
