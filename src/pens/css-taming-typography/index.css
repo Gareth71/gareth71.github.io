@@ -1,0 +1,235 @@
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  font-family: "Inter", sans-serif;
+}
+
+html.font-smoothing-enabled {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
+}
+
+body.font-smoothing-enabled {
+  font-size-adjust: from-font;
+}
+
+body {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+  font-family: "Iowan Old Style", "Georgia", "Palatino Linotype", serif;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-block-end: 1.5rem;
+  margin-block-end: 1.5rem;
+  border-bottom: 1px solid #ddd;
+}
+
+header * {
+  margin: 0;
+}
+
+header hgroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.header-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.css-feature {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.toggle-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+}
+
+.css-feature details {
+  min-width: 0;
+}
+
+.css-feature details summary {
+  cursor: pointer;
+}
+
+.css-feature details summary p {
+  display: inline;
+}
+
+.css-feature details pre {
+  overflow-x: auto;
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+/* ---- Fluid typography ---- */
+
+.article-container {
+  container-type: inline-size;
+}
+
+:root {
+  --step--1: clamp(0.875rem, 0.825rem + 0.5cqi, 0.9375rem);
+  --step-0: clamp(1rem, 0.9rem + 1cqi, 1.125rem);
+  --step-1: clamp(1.25rem, 1.1rem + 1.5cqi, 1.5rem);
+  --step-2: clamp(1.5rem, 1.3rem + 2cqi, 1.875rem);
+  --step-3: clamp(2rem, 1.6rem + 3cqi, 2.75rem);
+}
+
+.article-container.fluid-type-enabled h1 {
+  font-size: var(--step-3);
+}
+
+.article-container.fluid-type-enabled h2 {
+  font-size: var(--step-2);
+}
+
+.article-container.fluid-type-enabled h3 {
+  font-size: var(--step-1);
+}
+
+.article-container.fluid-type-enabled p,
+.article-container.fluid-type-enabled li,
+.article-container.fluid-type-enabled dt,
+.article-container.fluid-type-enabled dd,
+.article-container.fluid-type-enabled blockquote,
+.article-container.fluid-type-enabled td,
+.article-container.fluid-type-enabled th {
+  font-size: var(--step-0);
+}
+
+.article-container.fluid-type-enabled .byline,
+.article-container.fluid-type-enabled figcaption {
+  font-size: var(--step--1);
+}
+
+/* ---- Text box trim ---- */
+
+.article-container.text-box-trim-enabled h1,
+.article-container.text-box-trim-enabled h2,
+.article-container.text-box-trim-enabled h3,
+.article-container.text-box-trim-enabled p,
+.article-container.text-box-trim-enabled blockquote,
+.article-container.text-box-trim-enabled figcaption,
+.article-container.text-box-trim-enabled li {
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+  /* shorthand: text-box: trim-both cap alphabetic; */
+}
+
+.article-container.text-box-trim-enabled li {
+  min-height: 1lh;
+}
+
+@supports selector(:heading) {
+  .article-container.text-box-trim-enabled :heading {
+    text-box: trim-both cap alphabetic;
+  }
+}
+
+/* ---- Text wrap ---- */
+
+.article-container.text-wrap-enabled h1,
+.article-container.text-wrap-enabled h2,
+.article-container.text-wrap-enabled h3,
+.article-container.text-wrap-enabled blockquote,
+.article-container.text-wrap-enabled figcaption {
+  text-wrap: balance;
+}
+
+.article-container.text-wrap-enabled p,
+.article-container.text-wrap-enabled li,
+.article-container.text-wrap-enabled dd {
+  text-wrap: pretty;
+  max-width: 65ch;
+}
+
+.article-container.text-wrap-enabled [contenteditable="true"] {
+  text-wrap: stable;
+}
+
+/* ---- Hyphenation, hanging punctuation & underlines ---- */
+
+.article-container.hyphenation-enabled p {
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+  hyphenate-character: "‐";
+  hyphenate-limit-lines: 2;
+  hyphenate-limit-zone: 8%;
+  hyphenate-limit-last: always;
+  /* Safari legacy equivalents */
+  -webkit-hyphens: auto;
+  -webkit-hyphenate-limit-before: 4;
+  -webkit-hyphenate-limit-after: 3;
+  -webkit-hyphenate-limit-lines: 2;
+}
+
+.article-container.hyphenation-enabled pre,
+.article-container.hyphenation-enabled code,
+.article-container.hyphenation-enabled var,
+.article-container.hyphenation-enabled samp,
+.article-container.hyphenation-enabled kbd,
+.article-container.hyphenation-enabled h1,
+.article-container.hyphenation-enabled h2,
+.article-container.hyphenation-enabled h3 {
+  hyphens: manual;
+  -webkit-hyphens: manual;
+}
+
+.article-container.hyphenation-enabled blockquote,
+.article-container.hyphenation-enabled p {
+  hanging-punctuation: first allow-end last;
+}
+
+.article-container.hyphenation-enabled a {
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.15em;
+  text-decoration-skip-ink: auto;
+}
+
+/* ---- Variable font fine-tuning ---- */
+
+:root {
+  --vf-grad: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --vf-grad: -50;
+  }
+}
+
+body.variable-font-enabled {
+  font-optical-sizing: auto;
+  font-variant-ligatures: common-ligatures contextual;
+  font-kerning: normal;
+}
+
+@supports (font-variation-settings: normal) {
+  body.variable-font-enabled {
+    font-variation-settings: "opsz" auto;
+  }
+}
+
+body.variable-font-enabled * {
+  font-variation-settings: "GRAD" var(--vf-grad, 0);
+}

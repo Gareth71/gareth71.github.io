@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Typography</title>
+    <link rel="stylesheet" href="./index.css" />
+    <script defer src="./index.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <hgroup>
+        <h1>taming typography</h1>
+        <p>
+          originiall from:
+          <a href="https://css-tricks.com/taming-typography-modern-css-reset/"
+            >taming-typography-modern-css-reset</a
+          >
+        </p>
+      </hgroup>
+      <div class="header-grid">
+        <div class="css-feature">
+          <label class="toggle-control">
+            <input type="checkbox" id="font-smoothing-toggle" />
+            Enable font smoothing tweaks
+          </label>
+          <div>
+            <details>
+              <summary><p>this CSS is applied when checked:</p></summary>
+              <pre>
+        <code>
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
+}
+
+body {
+  font-size-adjust: from-font;
+}
+        </code>
+      </pre>
+            </details>
+          </div>
+        </div>
+        <div class="css-feature">
+          <label class="toggle-control">
+            <input type="checkbox" id="fluid-type-toggle" />
+            Enable fluid typography
+          </label>
+          <div>
+            <details>
+              <summary><p>this CSS is applied when checked:</p></summary>
+              <pre>
+        <code>
+.article-container {
+  container-type: inline-size;
+}
+
+:root {
+  --step-0: clamp(1rem, 0.9rem + 1cqi, 1.125rem);
+  --step-3: clamp(2rem, 1.6rem + 3cqi, 2.75rem);
+}
+        </code>
+      </pre>
+            </details>
+          </div>
+        </div>
+        <div class="css-feature">
+          <label class="toggle-control">
+            <input type="checkbox" id="text-box-trim-toggle" />
+            Enable text-box trim
+          </label>
+          <div>
+            <details>
+              <summary><p>this CSS is applied when checked:</p></summary>
+              <pre>
+        <code>
+:heading, p, blockquote, figcaption, li {
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+  /* shorthand: text-box: trim-both cap alphabetic; */
+}
+
+@supports selector(:heading) {
+  :heading {
+    text-box: trim-both cap alphabetic;
+  }
+}
+        </code>
+      </pre>
+            </details>
+          </div>
+        </div>
+        <div class="css-feature">
+          <label class="toggle-control">
+            <input type="checkbox" id="text-wrap-toggle" />
+            Enable text-wrap tweaks
+          </label>
+          <div>
+            <details>
+              <summary><p>this CSS is applied when checked:</p></summary>
+              <pre>
+        <code>
+:heading, blockquote, figcaption {
+  text-wrap: balance;
+}
+
+p, li, dd {
+  text-wrap: pretty;
+  max-width: 65ch;
+}
+
+[contenteditable="true"] {
+  text-wrap: stable;
+}
+        </code>
+      </pre>
+            </details>
+          </div>
+        </div>
+        <div class="css-feature">
+          <label class="toggle-control">
+            <input type="checkbox" id="hyphenation-toggle" />
+            Enable tuned hyphenation &amp; punctuation
+          </label>
+          <div>
+            <details>
+              <summary><p>this CSS is applied when checked:</p></summary>
+              <pre>
+        <code>
+p {
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+  hyphenate-character: "‐";
+  hyphenate-limit-lines: 2;
+  hyphenate-limit-zone: 8%;
+  hyphenate-limit-last: always;
+
+  /* Safari legacy equivalents */
+  -webkit-hyphens: auto;
+  -webkit-hyphenate-limit-before: 4;
+  -webkit-hyphenate-limit-after: 3;
+  -webkit-hyphenate-limit-lines: 2;
+}
+
+pre, code, var, samp, kbd, h1, h2, h3 {
+  hyphens: manual;
+  -webkit-hyphens: manual;
+}
+
+blockquote, p {
+  hanging-punctuation: first allow-end last;
+}
+
+a {
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.15em;
+  text-decoration-skip-ink: auto;
+}
+        </code>
+      </pre>
+            </details>
+          </div>
+        </div>
+        <div class="css-feature">
+          <label class="toggle-control">
+            <input type="checkbox" id="variable-font-toggle" />
+            Enable variable font tuning
+          </label>
+          <div>
+            <details>
+              <summary><p>this CSS is applied when checked:</p></summary>
+              <pre>
+        <code>
+body {
+  font-optical-sizing: auto;
+  font-variant-ligatures: common-ligatures contextual;
+  font-kerning: normal;
+}
+
+@supports (font-variation-settings: normal) {
+  body { font-variation-settings: "opsz" auto; }
+}
+
+/* Dark-mode grade compensation */
+:root {
+  --vf-grad: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root { --vf-grad: -50; }
+}
+
+* {
+  font-variation-settings: "GRAD" var(--vf-grad, 0);
+}
+        </code>
+      </pre>
+            </details>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="article-container">
+      <article>
+        <h1>Dracula</h1>
+        <p class="byline">
+          Bram Stoker &mdash; Chapter 1, Jonathan Harker's Journal
+        </p>
+
+        <p class="drop-cap">
+          3 May. Bishop Stratford.—Left Munich at 8:35 P.M., on 1st May,
+          arriving at Vienna early next morning; should have arrived at 6:46,
+          but train was an hour late. Buda-Pesth seems a wonderful place, from
+          the glimpse which I got of it from the train and the little I could
+          walk through the streets. I feared to go very far from the station, as
+          we had arrived late and would start as near the correct time as
+          possible. The impression I had was that we were leaving the West and
+          entering the East; the most western of splendid bridges over the
+          Danube, which is here of noble width and depth, took us among the
+          traditions of Turkish rule.
+        </p>
+
+        <h2>The Count's Castle</h2>
+        <p>
+          We left in pretty good time, and came after nightfall to Klausenburgh.
+          Here I stopped for the night at the Hotel Royale. I had for dinner, or
+          rather supper, a chicken done up some way with red pepper, which was
+          very good but thirsty.
+          <em>Mem., get recipe for Mina.</em>
+          I asked the waiter, and he said it was called "paprika hendl," and
+          that, as it was a national dish, I should be able to get it anywhere
+          along the Carpathians. I found my smattering of German very useful
+          here, indeed, I don't know how I should be able to get on without it.
+        </p>
+
+        <h3>Provisions for the Journey</h3>
+        <ul>
+          <li>A stout ash walking-stick, tipped with iron</li>
+          <li>
+            Crucifix and rosary, given by the innkeeper's wife at Bistritz 🕯️
+          </li>
+          <li>A small flask of slivovitz against the mountain cold</li>
+          <li>Maps of the Bukovina borderlands, much creased from handling</li>
+          <li>Letters of introduction to the Count, sealed in oilskin</li>
+        </ul>
+
+        <h3>A Glossary of Local Terms</h3>
+        <dl>
+          <dt>Ordog</dt>
+          <dd>
+            Satan, in the tongue of the Wallachian peasants I met upon the road.
+          </dd>
+          <dt>Pokol</dt>
+          <dd>
+            Hell — a word the old women murmured and crossed themselves after
+            speaking.
+          </dd>
+          <dt>Vrolok / Vlkoslak</dt>
+          <dd>
+            Slovak and Serbian words for the same terrible thing: something that
+            preys upon the living, be it vampire or werewolf.
+          </dd>
+        </dl>
+
+        <p>
+          The whole affair struck me as difficult, almost official, in its
+          formality — the innkeeper's wife would not accept payment for the
+          crucifix, and grew unaccountably agitated, gesturing toward the
+          darkening hills beyond Bistritz. I confess an inexplicable,
+          superstitious uneasiness settled over me as the horses were harnessed
+          for the last, unlit stretch of road toward the castle. 🦇
+        </p>
+
+        <blockquote>
+          "He is a very interesting man in himself. When we sat down to dinner
+          he made a remark on the notes for the tale of his journey to London."
+        </blockquote>
+
+        <p>
+          Having had some time at my disposal when in London, I had visited the
+          British Museum, and made search among the books and maps in the
+          library regarding Transylvania; it had struck me that some
+          foreknowledge of the country could hardly fail to have some importance
+          in dealing with a nobleman of that country. I found that the district
+          he named was in the extreme east of the country, just on the borders
+          of three states, Transylvania, Moldavia and Bukovina, in the midst of
+          the Carpathian mountains; one of the wildest and least known portions
+          of Europe.
+        </p>
+
+        <table class="tabular">
+          <caption>
+            Distances travelled, in miles
+          </caption>
+          <thead>
+            <tr>
+              <th>Leg</th>
+              <th>Distance</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Munich → Vienna</td>
+              <td>1,082</td>
+              <td>10.2 hrs</td>
+            </tr>
+            <tr>
+              <td>Vienna → Buda-Pesth</td>
+              <td>3,417</td>
+              <td>6.5 hrs</td>
+            </tr>
+            <tr>
+              <td>Buda-Pesth → Klausenburgh</td>
+              <td>9,204</td>
+              <td>11.0 hrs</td>
+            </tr>
+            <tr>
+              <td>Klausenburgh → Bistritz</td>
+              <td>1,036</td>
+              <td>4.3 hrs</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <figure>
+          <blockquote>
+            "Denn die Todten reiten schnell" —
+            <em>For the dead travel fast.</em>
+          </blockquote>
+          <figcaption>
+            An old local saying, quoted in Harker's journal before the final leg
+            to Castle Dracula.
+          </figcaption>
+        </figure>
+
+        <p>
+          The district I had noted was the extreme east of Transylvania, and I
+          set myself to search out its history and legends, as much as time
+          would allow. It seems to me that the more I read of superstition and
+          old wives' tales, the more curious my journey becomes; a strange land,
+          a strange people, strange things which the sane mind can hardly credit
+          &mdash; and yet I must write it all down, if only that Mina may one
+          day read it and understand what befell her husband on the road to a
+          castle few dare visit and fewer still return from unscathed.
+        </p>
+
+        <p>
+          Try a
+          <a href="#">search-linked reference</a>
+          or select the word
+          <mark class="js-searchable">Carpathians</mark>
+          above to see the highlight API in action.
+        </p>
+      </article>
+    </main>
+  </body>
+</html>
