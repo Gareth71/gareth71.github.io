@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elements Select native styling</title>
+    <link rel="stylesheet" href="../../styles/index.css" />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="left">
+      <h2>Default</h2>
+      <!-- Delivery method -->
+      <label for="delivery-method">Delivery method</label>
+      <select id="delivery-method" name="delivery-method">
+        <option value="standard">Standard</option>
+        <option value="express" selected>Express</option>
+        <option value="priority">Priority</option>
+        <option value="pickup">Pickup in person</option>
+      </select>
+
+      <!-- Country -->
+      <label for="country">Country</label>
+      <select id="country" name="country">
+        <optgroup label="North America">
+          <option value="us" selected>United States</option>
+          <option value="ca">Canada</option>
+          <option value="mx">Mexico</option>
+        </optgroup>
+
+        <optgroup label="Europe">
+          <option value="gb">United Kingdom</option>
+          <option value="de">Germany</option>
+          <option value="fr">France</option>
+        </optgroup>
+
+        <optgroup label="Asia Pacific">
+          <option value="jp">Japan</option>
+          <option value="au">Australia</option>
+          <option value="sg">Singapore</option>
+        </optgroup>
+      </select>
+
+      <!-- Payment method -->
+      <label for="payment-method">Payment method</label>
+      <select id="payment-method" name="payment-method">
+        <option value="prepaid" selected>
+          Pre-paid<span>Use retainer on file</span>
+        </option>
+        <option value="pay-now">
+          Pay now<span>Providing credit card</span>
+        </option>
+        <option value="pay-later">Pay later<span>Send invoice</span></option>
+      </select>
+    </div>
+
+    <div class="right">
+      <h2>Custom</h2>
+
+      <!-- Delivery method -->
+      <label for="delivery-method">Delivery method</label>
+      <select id="delivery-method" name="delivery-method">
+        <option value="standard">Standard</option>
+        <option value="express" selected>Express</option>
+        <option value="priority">Priority</option>
+        <option value="pickup">Pickup in person</option>
+      </select>
+
+      <!-- Country -->
+      <label for="country">Country</label>
+      <select id="country" name="country">
+        <optgroup label="North America">
+          <option value="us" selected>United States</option>
+          <option value="ca">Canada</option>
+          <option value="mx">Mexico</option>
+        </optgroup>
+
+        <optgroup label="Europe">
+          <option value="gb">United Kingdom</option>
+          <option value="de">Germany</option>
+          <option value="fr">France</option>
+        </optgroup>
+
+        <optgroup label="Asia Pacific">
+          <option value="jp">Japan</option>
+          <option value="au">Australia</option>
+          <option value="sg">Singapore</option>
+        </optgroup>
+      </select>
+
+      <!-- Payment method -->
+      <label for="payment-method">Payment method</label>
+      <select id="payment-method" name="payment-method">
+        <option value="prepaid" selected>
+          Pre-paid<span>Use retainer on file</span>
+        </option>
+        <option value="pay-now">
+          Pay now<span>Providing credit card</span>
+        </option>
+        <option value="pay-later">Pay later<span>Send invoice</span></option>
+      </select>
+    </div>
+  </body>
+</html>

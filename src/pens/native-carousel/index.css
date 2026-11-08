@@ -1,0 +1,224 @@
+body {
+  padding: 2rem;
+}
+
+h2 {
+  display: none;
+}
+
+ul {
+  padding: 0;
+  min-height: 300px;
+  display: flex;
+  gap: 4vw;
+  /* scrolling */
+  overflow-x: scroll;
+  /* make scrolling snap to each item*/
+  scroll-snap-type: x mandatory;
+  /* make items scroll into position rather than change instantly */
+  scroll-behavior: smooth;
+  /* set a reference so we can position the pesudo elements in relation to it*/
+  anchor-name: --my-carousel;
+  /* set the scroll markers to at the end */
+  /* instead of using pesudo element you can create an element containing <a> elements using scroll-target-group.*/
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/scroll-target-group */
+  scroll-marker-group: after;
+}
+li {
+  list-style-type: none;
+  border: 1px solid #dddddd;
+  flex: 0 0 100%;
+}
+
+li:nth-child(even) {
+  background-color: cyan;
+}
+
+li {
+  scroll-snap-align: center;
+}
+
+/* 1 button per axis left right*/
+ul::scroll-button(*) {
+  position: absolute;
+  /* position these in relation to the uls reference */
+  position-anchor: --my-carousel;
+
+  border: 0;
+  font-size: 2rem;
+  background: none;
+  color: black;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+ul::scroll-button(*):hover,
+ul::scroll-button(*):focus {
+  opacity: 1;
+}
+
+ul::scroll-button(*):active {
+  translate: 1px 1px;
+}
+
+ul::scroll-button(*):disabled {
+  opacity: 0.2;
+  cursor: unset;
+}
+/* The text after the slash is alt text for screen readers */
+ul::scroll-button(left) {
+  content: "◄" / "Previous";
+  /* set positioning using the anchor function, we set the reference earlier */
+  right: calc(anchor(left) - 70px);
+  bottom: calc(anchor(top) + 0);
+}
+
+ul::scroll-button(right) {
+  content: "►" / "Next";
+  /* set positioning using the anchor function, we set the reference earlier */
+  left: calc(anchor(right) - 70px);
+  bottom: calc(anchor(top) + 0);
+}
+
+/* position in the same way as the buttons */
+/* using scroll-marker-group allows us to tab  to it and cycle backwards and forwards with arrow keys   */
+ul::scroll-marker-group {
+  position: absolute;
+  position-anchor: --my-carousel;
+  top: calc(anchor(bottom) - 70px);
+  justify-self: anchor-center;
+
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* style the scroll markers */
+li::scroll-marker {
+  /* setting content to "" would not give screen readers an accessible name */
+  /* the attr function allows us to pull data- attribute from the element */
+  content: attr(data-accName);
+  width: 16px;
+  height: 16px;
+  background-color: transparent;
+  border: 2px solid black;
+  border-radius: 50%;
+  overflow: hidden;
+  text-indent: 16px;
+}
+/* style the marker that is active */
+li::scroll-marker:target-current {
+  background-color: black;
+}
+
+ul img {
+  display: block;
+  /* width: 100%; */
+  /* aspect-ratio: 16 / 9; */
+  object-fit: cover;
+}
+
+/* carousel {
+  display: block;
+  position: relative;
+  max-width: 72rem;
+  margin-inline: auto;
+}
+
+.carousel__slides {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.carousel__slides::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel__slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: #f3f4f6;
+}
+
+.carousel__slide img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.carousel__slide h2 {
+  margin: 0;
+  padding: 1rem;
+  font:
+    600 1.125rem/1.3 system-ui,
+    sans-serif;
+}
+
+.carousel__button {
+  position: absolute;
+  top: 40%;
+  display: grid;
+  width: 2.75rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  color: white;
+  background: rgb(0 0 0 / 65%);
+  cursor: pointer;
+}
+
+.carousel__button::before {
+  font:
+    700 1.5rem/1 system-ui,
+    sans-serif;
+}
+
+.carousel__button--previous {
+  left: 1rem;
+}
+
+.carousel__button--previous::before {
+  content: "←";
+}
+
+.carousel__button--next {
+  right: 1rem;
+}
+
+.carousel__button--next::before {
+  content: "→";
+}
+
+.carousel__picker {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.carousel__picker button {
+  width: 0.65rem;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #aaa;
+  cursor: pointer;
+}
+
+.carousel__picker button[selected] {
+  background: #222;
+  transform: scale(1.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel__slides {
+    scroll-behavior: auto;
+  }
+} */

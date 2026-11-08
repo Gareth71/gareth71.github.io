@@ -13,103 +13,107 @@
       <a target="_self" href="./src/notion">Notion</a>
       <ul role="list">
         <li>
-          <a target="_self" href="./src/pens/accordion/">Accordion</a>
-        </li>
-        <li>
-          <a target="_self" href="./src/pens/accessible-table/"
-            >Accessible table</a
+          <a target="_self" href="./src/pens/elements-table-accessible/"
+            >Elements Table accessible</a
           >
         </li>
         <li>
-          <a target="_self" href="./src/pens/customizable-select/"
-            >Customizable select</a
+          <a target="_self" href="./src/pens/elements-select-native-styling/"
+            >Elements Select native styling</a
           >
         </li>
         <li>
-          <a target="_self" href="./src/pens/quantity-queries/"
-            >Quantity queries</a
+          <a target="_self" href="./src/pens/css-understanding-quantity-selectors/"
+            >CSS understanding quantity selectors</a
           >
         </li>
         <li>
-          <a target="_self" href="./src/pens/heading-line-height/"
-            >Heading line-height</a
+          <a target="_self" href="./src/pens/css-heading-line-height/"
+            >CSS Heading line-height</a
           >
         </li>
         <li>
-          <a target="_self" href="./src/pens/device-camera/">Device camera</a>
+          <a target="_self" href="./src/pens/webapi-mediaDevices-camera/">WebAPI mediaDevices (camera)</a>
         </li>
 
         <li>
           <a target="_self" href="./src/pens/font-face/">Font-face</a>
         </li>
         <li>
-          <a target="_self" href="./src/pens/form-example/">Form example</a>
+          <a target="_self" href="./src/pens/elements-form/">Elemenmts Form</a>
         </li>
         <li>
-          <a target="_self" href="./src/pens/form-validation/"
-            >Form validation</a
+          <a target="_self" href="./src/pens/elements-form-validation/"
+            >Elements Form validation</a
           >
         </li>
         <li>
-          <a target="_self" href="./src/pens/number-inputs/">Number inputs</a>
+          <a target="_self" href="./src/pens/elements-input-number/">Elements Input number</a>
         </li>
         <li>
-          <a target="_self" href="./src/pens/visually-hidden/"
-            >Visually hidden</a
+          <a target="_self" href="./src/pens/css-visually-hidden/"
+            >CSS Visually hidden</a
           >
         </li>
         <li>
-          <a target="_self" href="./src/pens/input-container/"
-            >Input container</a
+          <a target="_self" href="./src/pens/elements-form-error-message/"
+            >Elements Form error message</a
           >
         </li>
         <li>
           <a target="_self" href="./src/pens/components-combobox/"
-            >Components combobox</a
+            >Components Combobox</a
           >
         </li>
         <li>
-          <a target="_self" href="./src/pens/components-combobox/with-arrow.html"
-            >Components combobox fancy</a
-          >
+          <a target="_self" href="./src/pens/components-card-as-link/">Components Card as link</a>
         </li>
         <li>
-          <a target="_self" href="./src/pens/card-as-link/">Card as link</a>
-        </li>
-        <li>
-          <a target="_self" href="./src/pens/scroll-fade/">Scroll fade</a>
+          <a target="_self" href="./src/pens/css-scroll-animation/">CSS Scroll animation</a>
         </li>
         <li>
           <a target="_self" href="./src/pens/svg-sprites/">SVG sprites</a>
         </li>
         <li>
-          <a target="_self" href="./src/pens/preferes-color-scheme/"
-            >Preferes-color-scheme</a
+          <a target="_self" href="./src/pens/css-preferes-color-scheme/"
+            >CSS Preferes-color-scheme</a
           >
         </li>
         <li>
-          <a target="_self" href="./src/pens/sroll-overflow-100vw/"
-            >Scrollbars cause overflow with 100vw</a
+          <a target="_self" href="./src/pens/css-dont-use-100vw/"
+            >CSS Don't use 100vw</a
           >
         </li>
-        <li><a target="_self" href="./src/pens/storybook/">Storybook</a></li>
+        <li><a target="_self" href="./src/pens/shared-pen-styling/">Shared pen styling</a></li>
         <li>
-          <a target="_self" href="./src/pens/view-transition/"
-            >View transition</a
+          <a target="_self" href="./src/pens/webapi-view-transition/"
+            >WebAPI View transition</a
           >
         </li>
         <li>
-          <a target="_self" href="./src/pens/hub-card-test/">Hub card test</a>
+          <a target="_self" href="./src/pens/components-hub-card-test/">Components Hub card test</a>
         </li>
         <li>
-          <a target="_self" href="./src/pens/intl-date-time-format-api/"
-            >Intl.DateTimeFormat api</a
+          <a target="_self" href="./src/pens/webapi-intl-date-time-format/"
+            >WebAPI Intl.DateTimeFormat</a
           >
         </li>
       </ul>
     </main>
 
     <style></style>
-    <script></script>
+    <script>
+     const list = document.querySelector("ul");
+
+      const items = [...list.querySelectorAll("li")];
+      items.sort((a, b) => {
+        const aHref = a.querySelector("a").href;
+        const bHref = b.querySelector("a").href;
+        return aHref.localeCompare(bHref)
+        });
+
+      list.append(...items);
+
+    </script>
   </body>
 </html>
