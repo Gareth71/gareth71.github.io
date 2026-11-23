@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Json import</title>
+    <script defer type="module" src="index.js"></script>
+    <link rel="stylesheet" href="../../styles/index.css" />
+  </head>
+  <body>
+    <nav><a target="_self" href="../../../">Home</a></nav>
+    <main>
+      <h1>JS Json import</h1>
+      <p>To import local json files into a script.</p>
+      <ul>
+        <li>
+          <p>Add this to your .js</p>
+          <p>
+            <code class="code-block"
+              >import data from "your-data.json" with { type: "json" };</code
+            >
+          </p>
+        </li>
+        <li>
+          <p>Import your script as a module</p>
+          <p>
+            <code class="code-block"
+              >&lt;script defer type="module" src="index.js">&lt;/script></code
+            >
+          </p>
+        </li>
+      </ul>
+      <p>Imported JSON</p>
+      <output class="code-block"></output>
+    </main>
+  </body>
+</html>
