@@ -1,0 +1,13 @@
+output {
+  display: block;
+}
+
+main {
+  display: flex;
+  gap: 1rem;
+}
+
+.left,
+.right {
+  flex-grow: 1;
+}
