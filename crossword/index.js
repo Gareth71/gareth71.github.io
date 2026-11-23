@@ -1,4 +1,4 @@
-import words from "./data/vocabulary-core-words.json" with { type: "json" };
+import words from "./vocabulary-core-words.json" with { type: "json" };
 
 const input = document.querySelector("[data-input]");
 const button = document.querySelector("[data-search]");
